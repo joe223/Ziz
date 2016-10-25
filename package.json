@@ -1,0 +1,22 @@
+{
+  "name": "blade",
+  "version": "1.0.0",
+  "description": "a markdown parser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joe223/blade.git"
+  },
+  "keywords": [
+    "markdown"
+  ],
+  "author": "joe223",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joe223/blade/issues"
+  },
+  "homepage": "https://github.com/joe223/blade#readme"
+}
