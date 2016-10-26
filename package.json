@@ -18,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/joe223/blade/issues"
   },
-  "homepage": "https://github.com/joe223/blade#readme"
+  "homepage": "https://github.com/joe223/blade#readme",
+  "dependencies": {
+    "fis-parser-babel-5.x": "^1.4.0",
+    "fis3-hook-amd": "^0.2.0",
+    "fis3-hook-commonjs": "^0.1.25",
+    "fis3-hook-node_modules": "^2.2.8",
+    "fis3-postpackager-loader": "^2.1.4"
+  }
 }

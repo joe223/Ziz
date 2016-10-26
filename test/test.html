@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blade test</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            height: 100%;
+            font-family: arial,sans-serif;
+            font-size: 20px;
+            background-color: #eee;
+        }
+        .container {
+            margin: 2.5rem auto 2.5rem auto;
+            padding: 1rem;
+            width: 48rem;
+            height: 50%;
+            box-shadow: rgba(0,0,0,0.15) 0 0 4px 2px;
+            background-color: #fff;
+        }
+        .box {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        .md,
+        #result {
+            display: inline-block;
+            flex: 1;
+            height: 100%;
+        }
+        .md textarea {
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 0.3rem;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+            resize: none;
+        }
+        #result {
+            padding: 0.3rem;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="md">
+                <textarea id="md" name="name"></textarea>
+            </div>
+            <div id="result"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/dist/blade.js"></script>
+    <script type="text/javascript">
+        var textarea = document.getElementById("md");
+        var result = document.getElementById("result");
+        textarea.addEventListener("input", function () {
+            var content = textarea.value;
+            result.innerHTML = content;
+        });
+    </script>
+</body>
+</html>
