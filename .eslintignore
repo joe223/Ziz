@@ -1,3 +1,4 @@
 node_modules/*
 dist/*
 fis-conf.js
+rollup.config.js
