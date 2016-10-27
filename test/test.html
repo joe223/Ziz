@@ -58,7 +58,18 @@
     <div class="container">
         <div class="box">
             <div class="md">
-                <textarea id="md" name="name"></textarea>
+                <textarea id="md" name="name">
+hello world!
+#a#
+##bb
+###ccc
+####dddd
+#####eeeee
+######ffffff
+header1
+=====
+header2
+-----</textarea>
             </div>
             <div id="result"></div>
         </div>
@@ -71,6 +82,21 @@
             var content = textarea.value;
             result.innerHTML = blade( content );
         });
+    </script>
+    <script>
+        (function(){
+            let h3 = /###\s?.*(\n)/igm;
+                // ^#{3}\s?.*?#{3}
+                // ^#{3}\s?.*?(#{3}|$) best!!!
+            let h1 = /.*(\n)=====+/igm;
+            let table = /(.*(\|.*[^\|])+(\|).*\n)(-{3,}\s?(\|\s?.*\s?\|)+\s?-{3,}\n)(.*(\|.*\|)+.*\n)+(.*(\|.*\|)+.*\n?)?/igm;
+            let italic = /\*[^*].+?\*/igm;                // 斜体
+            // let italic2 = /(?<!\*)\*\w+?\*(?!\*)/gm;
+            let link = /\[(.*[^\[])[^\[]\w*?\]\([^\(].*?\)/igm;    // wrong
+            let link2 = /\[[^\[\]]*\]\([^\(\)]*\)/mg;             // right
+            let link3 = /\[[^\[\]]*\]\([^\(\)\s]*\)/igm;            // right
+            let reference = /\[\w+\]:\s*\w+$/igm;                    //
+        })();
     </script>
 </body>
 </html>
