@@ -8,9 +8,10 @@ export default ( content ) => {
     let setextHeader2 = /^(.*)\r?\n(-{5,})$/gm;                 // setext style header 2
 
     for ( let i = 6; i >= 1; i-- ) {
-        let atx = `^(#{${i}})([^#]+.*?)((#{${i}})?$)`;          // atx header
+        let atx = `^(#{${i}})([^#].*?)((#{1,})?$)`;          // atx header
         let regex = new RegExp( atx, "gm" );
         content = content.replace( regex, ( $0, $1, $2, index, str ) => {
+            // console.log($2)
             return `<h${i}>${$2}</h${i}>`;
         });
     }

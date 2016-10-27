@@ -14,9 +14,10 @@ var header = (function (content) {
     var setextHeader2 = /^(.*)\r?\n(-{5,})$/gm; // setext style header 2
 
     var _loop = function _loop(i) {
-        var atx = "^(#{" + i + "})([^#]+.*?)((#{" + i + "})?$)"; // atx header
+        var atx = "^(#{" + i + "})([^#].*?)((#{1,})?$)"; // atx header
         var regex = new RegExp(atx, "gm");
         content = content.replace(regex, function ($0, $1, $2, index, str) {
+            // console.log($2)
             return "<h" + i + ">" + $2 + "</h" + i + ">";
         });
     };
@@ -39,19 +40,28 @@ var header = (function (content) {
  */
 
 var paragraph = (function (content) {
-    var regex = /^(.*)$/gm;
-    content = content.replace(regex, function ($0, $1) {
-        return "<p>" + $1 + "</p>";
+    // let regex = /^.*\w+$/gm;
+    // content = content.replace( regex, ( $0, $1 ) => {
+    //     return `<p>${$1}</p>`;
+    // });
+    var arr = content.split(/\n/g);
+    var isHTML = /^<[a-zA-Z0-9]{1,3}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,3}>$/gm;
+    var isSpace = /^\s*$/gm;
+    var newContent = "";
+    arr.map(function (item, index, arr) {
+        // console.log(item);
+        var str = "";
+        if (!isHTML.test(item)) {
+            //&& !isSpace.test(item)
+            str = "<p>" + item + "</p>";
+        } else {
+            str = item;
+        }
+        console.log("item:" + item);
+        console.log("str:" + str);
+        newContent += str;
     });
-    return content;
-});
-
-var space = (function (content) {
-    var regex = /^$/gm;
-    content.replace(regex, function ($0) {
-        return "<br>";
-    });
-    return content;
+    return newContent;
 });
 
 var blade = (function (content) {
@@ -59,7 +69,7 @@ var blade = (function (content) {
     content = header(content);
     // content = table( content );
     content = paragraph(content);
-    content = space(content);
+    // content = space( content );
     return content;
 });
 
