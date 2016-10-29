@@ -40,17 +40,12 @@ var header = (function (content) {
  */
 
 var paragraph = (function (content) {
-    // let regex = /^.*\w+$/gm;
-    // content = content.replace( regex, ( $0, $1 ) => {
-    //     return `<p>${$1}</p>`;
-    // });
     var arr = content.split(/\n/g);
     var isHTML = /^<[a-zA-Z0-9]{1,3}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,3}>$/; // no globally
     var isSpace = /^[\u0020]+|\r|\n$/; // space & line break
     var newContent = "";
 
     arr.map(function (item, index, arr) {
-        // console.log(item);
         var str = "";
         item = item.replace(/\s/g, "");
         if (!isHTML.test(item) && !isSpace.test(item) && item !== "") {
@@ -58,9 +53,9 @@ var paragraph = (function (content) {
         } else {
             str = item;
         }
-        // console.log("str:" + str);
         newContent += str;
     });
+
     return newContent;
 });
 
