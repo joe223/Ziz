@@ -1,7 +1,6 @@
 export default ( content ) => {
-    let regex = /^$/gm;
-    content.replace( regex, ( $0 ) => {
-        return "<br>";
-    });
+    let regex = /[\u0020]/gm;
+    content = content.replace( regex, "&nbsp;");
+
     return content;
 };

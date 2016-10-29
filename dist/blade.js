@@ -45,31 +45,38 @@ var paragraph = (function (content) {
     //     return `<p>${$1}</p>`;
     // });
     var arr = content.split(/\n/g);
-    var isHTML = /^<[a-zA-Z0-9]{1,3}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,3}>$/gm;
-    var isSpace = /^\s*$/gm;
+    var isHTML = /^<[a-zA-Z0-9]{1,3}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,3}>$/; // no globally
+    var isSpace = /^[\u0020]+|\r|\n$/; // space & line break
     var newContent = "";
+
     arr.map(function (item, index, arr) {
         // console.log(item);
         var str = "";
-        if (!isHTML.test(item)) {
-            //&& !isSpace.test(item)
+        item = item.replace(/\s/g, "");
+        if (!isHTML.test(item) && !isSpace.test(item) && item !== "") {
             str = "<p>" + item + "</p>";
         } else {
             str = item;
         }
-        console.log("item:" + item);
-        console.log("str:" + str);
+        // console.log("str:" + str);
         newContent += str;
     });
     return newContent;
 });
 
+var space = (function (content) {
+    var regex = /[\u0020]/gm;
+    content = content.replace(regex, "&nbsp;");
+
+    return content;
+});
+
 var blade = (function (content) {
     content += "\r\n";
+    content = space(content);
     content = header(content);
     // content = table( content );
     content = paragraph(content);
-    // content = space( content );
     return content;
 });
 

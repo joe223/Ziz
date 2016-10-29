@@ -6,9 +6,9 @@ import space from "./parser/space";
 
 export default ( content ) => {
     content += "\r\n";
+    content = space( content );
     content = header( content );
     // content = table( content );
     content = paragraph( content );
-    // content = space( content );
     return content;
 };
