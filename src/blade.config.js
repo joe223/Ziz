@@ -2,7 +2,8 @@
  * blade configrue
  */
 export default {
-    header: true,
+    highlightCode: false,           // use highlight.js
+    header: true,                   //
     table: true,
     list: true
 };

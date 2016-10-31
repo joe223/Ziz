@@ -4,8 +4,7 @@
  * @return {[type]}         [description]
  */
 export default ( content ) => {
-    let regex = /[\u0020]/gm;
+    let regex = /[\u0020]/gm;               // ^(?!>#)*[\u0020]+    |   (^(?!>#)*)?[\u0020]
     content = content.replace( regex, "&nbsp;");
-
     return content;
 };
