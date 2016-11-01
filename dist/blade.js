@@ -94,10 +94,23 @@ var paragraph = (function (content) {
     var arr = content.split(/\n/g);
     var isHTML = /^<[a-zA-Z0-9]{1,11}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,11}>$/; // no globally
     var isSpace = /^[\u0020]+|\r|\n$/; // space & line break
+    var isCodeStart = /<code>/;
+    var isCodeEnd = /<\/code>/;
     var newContent = "";
-
+    var status = false;
     arr.map(function (item, index, arr) {
+        console.log(item);
         var str = "";
+        if (isCodeStart.test(item) || status) {
+            status = true;
+            newContent += item + "\r\n";
+            return;
+        }
+        if (isCodeEnd.test(item)) {
+            status = false;
+            newContent += item + "\r\n";
+            return;
+        }
         item = item.replace(/\s/g, "");
         if (!isHTML.test(item) && !isSpace.test(item) && item !== "") {
             str = "<p>" + item + "</p>";
