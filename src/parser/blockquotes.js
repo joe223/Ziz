@@ -1,13 +1,11 @@
 /**
- * Blockquotes
+ * Blockquotes (nested)
  * @param  {[type]} content [description]
  * @return {[type]}         [description]s
  */
 export default ( content ) => {
     let regex = /(^((&nbsp;)*>+(&nbsp;)*)+)(.*)([^>]$)/gm;         // (^>+(&nbsp;)*)+(.*)([^>]$)
-    console.log(content);
     content = content.replace( regex, ( $0, $1, $2, $3, $4, $5, index, str ) => {
-        console.log( $5 );
         let blockquoteStart = "<blockquotes>";
         let blockquoteEnd = "</blockquotes>";
         let count = 0;

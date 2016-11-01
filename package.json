@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/joe223/blade#readme",
   "dependencies": {
+    "highlight.js": "^9.7.0"
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.2.0",

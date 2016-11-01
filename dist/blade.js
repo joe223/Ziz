@@ -54,6 +54,37 @@ var header = (function (content) {
  * @return {[type]} [description]
  */
 
+// ^```(.*|\n)+?([^`]){3,}```$
+// ^```(.*|\n)+?([^`]){3,}```$
+
+// /(^[\u0020]*`{3}([a-zA-z]{3,10})?)(\n.*?)+`{3}$/gm              // code block with ``` ==> <pre><code> </code><pre>
+// /([\u0020]*`{3})(.*?)(`{3})/gm                                  // inline code with ```  ==> <code> <code>
+// /([\u0020]*`{2})(.*?)(`{2})/gm                                  // inline code with ``  ==> <code> <code>
+// /([\u0020]*`)(.*?)(`)/gm                                        // inline code with  ` ==> <code> <code>
+
+var code = (function (content) {
+    var inlineCodeStart = "<code>";
+    var inlineCodeEnd = "</code>";
+    // const codeBlockStart = "<pre><code>";
+    var codeBlockEnd = "</code></pre>";
+
+    /** convert codeBlock */
+    var regCodeBlock = /(^(&nbsp;)*`{3}([a-zA-z]{3,10})?)((\n.*?)+)(`{3}$)/gm;
+    content = content.replace(regCodeBlock, function ($0, $1, $2, $3, $4, $5, $6, index, str) {
+        var text = $4;
+        console.log($2);
+        console.log($3);
+        console.log($4);
+        console.log($5);
+        var lang = $3 ? $3.toLowerCase() : "nohighlight"; // language
+        text = "<pre><code>" + text + "</code></pre>";
+        console.log(text);
+        return text;
+    });
+    // console.log( content );
+    return content;
+});
+
 /**
  * paragraph
  * @param  {[type]} content [description]
@@ -61,7 +92,7 @@ var header = (function (content) {
  */
 var paragraph = (function (content) {
     var arr = content.split(/\n/g);
-    var isHTML = /^<[a-zA-Z0-9]{1,3}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,3}>$/; // no globally
+    var isHTML = /^<[a-zA-Z0-9]{1,11}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,11}>$/; // no globally
     var isSpace = /^[\u0020]+|\r|\n$/; // space & line break
     var newContent = "";
 
@@ -80,15 +111,13 @@ var paragraph = (function (content) {
 });
 
 /**
- * Blockquotes
+ * Blockquotes (nested)
  * @param  {[type]} content [description]
  * @return {[type]}         [description]s
  */
 var blockquotes = (function (content) {
     var regex = /(^((&nbsp;)*>+(&nbsp;)*)+)(.*)([^>]$)/gm; // (^>+(&nbsp;)*)+(.*)([^>]$)
-    console.log(content);
     content = content.replace(regex, function ($0, $1, $2, $3, $4, $5, index, str) {
-        console.log($5);
         var blockquoteStart = "<blockquotes>";
         var blockquoteEnd = "</blockquotes>";
         var count = 0;
@@ -106,7 +135,7 @@ var blade = (function (content) {
     content = space(content);
     content = header(content);
     // content = table( content );
-    //
+    content = code(content);
     content = blockquotes(content);
     content = paragraph(content);
     return content;
