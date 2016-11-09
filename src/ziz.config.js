@@ -1,5 +1,5 @@
 /**
- * blade configrue
+ * ziz configrue
  */
 export default {
     highlightCode: false,           // use highlight.js

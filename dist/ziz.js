@@ -1,11 +1,11 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.blade = factory());
+  (global.Ziz = factory());
 }(this, (function () { 'use strict';
 
 /**
- * blade configrue
+ * ziz configrue
  */
 
 /**
@@ -58,31 +58,44 @@ var header = (function (content) {
 // ^```(.*|\n)+?([^`]){3,}```$
 
 // /(^[\u0020]*`{3}([a-zA-z]{3,10})?)(\n.*?)+`{3}$/gm              // code block with ``` ==> <pre><code> </code><pre>
-// /([\u0020]*`{3})(.*?)(`{3})/gm                                  // inline code with ```  ==> <code> <code>
-// /([\u0020]*`{2})(.*?)(`{2})/gm                                  // inline code with ``  ==> <code> <code>
-// /([\u0020]*`)(.*?)(`)/gm                                        // inline code with  ` ==> <code> <code>
+// /([\u0020]*`{3}[^`])(.*?)(`{3})/gm                                  // inline code with ```  ==> <code> <code>
+// /([\u0020]*`{2}[^`])(.*?)(`{2})/gm                                  // inline code with ``  ==> <code> <code>
+// /([\u0020]*`[^`])(.*?)(`)/gm                                        // inline code with  ` ==> <code> <code>
 
 var code = (function (content) {
-    var inlineCodeStart = "<code>";
-    var inlineCodeEnd = "</code>";
-    // const codeBlockStart = "<pre><code>";
-    var codeBlockEnd = "</code></pre>";
-
     /** convert codeBlock */
     var regCodeBlock = /(^(&nbsp;)*`{3}([a-zA-z]{3,10})?)((\n.*?)+)(`{3}$)/gm;
+    var isCode = /\<code\>(.*?)\<\/code\>/;
+    var hasLineBreak = /\r?\n/;
     content = content.replace(regCodeBlock, function ($0, $1, $2, $3, $4, $5, $6, index, str) {
         var text = $4;
-        console.log($2);
-        console.log($3);
-        console.log($4);
-        console.log($5);
         var lang = $3 ? $3.toLowerCase() : "nohighlight"; // language
-        text = "<pre><code>" + text + "</code></pre>";
-        console.log(text);
+        text = "<pre><code class='" + lang + "'>" + text + "</code></pre>";
         return text;
     });
-    // console.log( content );
-    return content;
+    /** inline code with ``` .* ``` */
+    var arr = content.split(/\n/);
+    var newContent = "";
+    arr.map(function (item, index) {
+        console.log(item);
+        for (var i = 3; i >= 1; i--) {
+            var inlineCode = "(`{" + i + "})([^`]{1,}.*?[^`]*)(`{" + i + "})";
+            var regex = new RegExp(inlineCode, "g");
+            item = item.replace(regex, function ($0, $1, $2, $3, index, str) {
+                var text = $2;
+                if (!isCode.test(text) && $2.length > 0 && !hasLineBreak.test(text)) {
+                    text = "<code>" + text + "</code>";
+                    return text;
+                } else {
+                    return $0;
+                }
+            });
+        }
+        item += "\n";
+        newContent += item;
+    });
+    console.log(newContent);
+    return newContent;
 });
 
 /**
@@ -94,12 +107,12 @@ var paragraph = (function (content) {
     var arr = content.split(/\n/g);
     var isHTML = /^<[a-zA-Z0-9]{1,11}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,11}>$/; // no globally
     var isSpace = /^[\u0020]+|\r|\n$/; // space & line break
-    var isCodeStart = /<code>/;
-    var isCodeEnd = /<\/code>/;
+    var isCodeStart = /^(<pre>)?<code>$/;
+    var isCodeEnd = /^<\/code>(<pre>)?/;
     var newContent = "";
     var status = false;
     arr.map(function (item, index, arr) {
-        console.log(item);
+        // console.log(item);
         var str = "";
         if (isCodeStart.test(item) || status) {
             status = true;
@@ -111,7 +124,7 @@ var paragraph = (function (content) {
             newContent += item + "\r\n";
             return;
         }
-        item = item.replace(/\s/g, "");
+        // item = item.replace( /\s/g, "" );           // TODO: should keep space
         if (!isHTML.test(item) && !isSpace.test(item) && item !== "") {
             str = "<p>" + item + "</p>";
         } else {
@@ -143,18 +156,19 @@ var blockquotes = (function (content) {
     return content;
 });
 
-var blade = (function (content) {
+function Ziz(content) {
     content += "\r\n";
     content = space(content);
     content = header(content);
+    // TODO: fixed table
     // content = table( content );
     content = code(content);
     content = blockquotes(content);
     content = paragraph(content);
     return content;
-});
+}
 
-return blade;
+return Ziz;
 
 })));
-//# sourceMappingURL=blade.js.map
+//# sourceMappingURL=Ziz.js.map

@@ -1,4 +1,4 @@
-import config from "./blade.config";
+import config from "./ziz.config";
 import space from "./parser/space";
 import header from "./parser/header";
 import table from "./parser/table";
@@ -6,13 +6,14 @@ import code from "./parser/code";
 import paragraph from "./parser/paragraph";
 import blockquotes from "./parser/blockquotes";
 
-export default ( content ) => {
+export default function Ziz ( content ) {
     content += "\r\n";
     content = space( content );
     content = header( content );
+    // TODO: fixed table
     // content = table( content );
     content = code( content );
     content = blockquotes ( content );
     content = paragraph( content );
     return content;
-};
+}

@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "rollup -c -w",
+    "watch": "watch 'rollup -c' --wait=2 ./src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joe223/blade.git"
+    "url": "git+https://github.com/joe223/Ziz.git"
   },
   "keywords": [
     "markdown"
@@ -17,9 +18,9 @@
   "author": "joe223",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/joe223/blade/issues"
+    "url": "https://github.com/joe223/Ziz/issues"
   },
-  "homepage": "https://github.com/joe223/blade#readme",
+  "homepage": "https://github.com/joe223/Ziz#readme",
   "dependencies": {
     "highlight.js": "^9.7.0"
   },
@@ -30,6 +31,8 @@
     "rollup-plugin-eslint": "^3.0.0",
     "rollup-plugin-json": "^2.0.2",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-watch": "^2.5.0"
+    "rollup-plugin-uglify": "^1.0.1",
+    "rollup-watch": "^2.5.0",
+    "watch": "^1.0.1"
   }
 }

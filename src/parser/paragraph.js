@@ -12,7 +12,7 @@ export default ( content ) => {
     let newContent = "";
     let status = false;
     arr.map( ( item, index, arr ) => {
-        console.log(item);
+        // console.log(item);
         let str = "";
         if ( isCodeStart.test( item ) || status ) {
             status = true;
@@ -24,7 +24,7 @@ export default ( content ) => {
             newContent += ( item + "\r\n" );
             return;
         }
-        item = item.replace( /\s/g, "" );
+        // item = item.replace( /\s/g, "" );           // TODO: should keep space
         if ( !isHTML.test( item ) && !isSpace.test( item ) && item !== "" ) {
             str = `<p>${item}</p>`;
         } else {
