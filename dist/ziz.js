@@ -50,6 +50,18 @@ var header = (function (content) {
 });
 
 /**
+ * list
+ * @param  {[type]} content [description]
+ * @return {[type]}         [description]
+ */
+var list = (function (content) {
+  var isUnorderedList = /((^[\*|\+|-])(&nbsp;)+)(.*?)$/gm;
+  var isOrderedList = /((^[\d]\.)(&nbsp;)+)(.*?)$/gm;
+
+  return content;
+});
+
+/**
  * table
  * @return {[type]} [description]
  */
@@ -163,6 +175,7 @@ function Ziz(content) {
     // TODO: fixed table
     // content = table( content );
     content = code(content);
+    content = list(content);
     content = blockquotes(content);
     content = paragraph(content);
     return content;
