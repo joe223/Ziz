@@ -12,7 +12,7 @@ export default function Ziz ( content ) {
     content = space( content );
     content = header( content );
     // TODO: fixed table
-    // content = table( content );
+    content = table( content );
     content = code( content );
     content = list( content );
     content = blockquotes ( content );

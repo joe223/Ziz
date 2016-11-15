@@ -21,7 +21,6 @@ export default ( content ) => {
     let arr = content.split( /\n/ );
     let newContent = "";
     arr.map( ( item, index ) => {
-        console.log(item)
         for ( let i = 3; i >= 1; i-- ) {
             let inlineCode = `(\`{${i}})([^\`]{1,}.*?[^\`]*)(\`{${i}})`;
             let regex = new RegExp( inlineCode, "g" );
@@ -38,6 +37,5 @@ export default ( content ) => {
         item += "\n";
         newContent += item;
     });
-    console.log(newContent)
     return newContent;
 };

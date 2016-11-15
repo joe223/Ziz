@@ -9,7 +9,7 @@ export default {
     entry: './src/ziz.js',
     plugins: [
         json(),
-        // uglify(),
+        uglify(),
         babel({
             exclude: 'node_modules/**',
         }),
