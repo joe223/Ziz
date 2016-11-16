@@ -1,5 +1,6 @@
 import config from "./ziz.config";
 import space from "./parser/space";
+import del from "./parser/del";
 import header from "./parser/header";
 import list from "./parser/list";
 import table from "./parser/table";
@@ -16,6 +17,7 @@ export default function Ziz ( content ) {
     content = code( content );
     content = list( content );
     content = blockquotes ( content );
+    content = del( content );
     content = paragraph( content );
     return content;
 }
