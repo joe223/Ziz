@@ -1,5 +1,6 @@
 import config from "./ziz.config";
 import space from "./parser/space";
+import escapeSpecialChars from "./parser/escapeSpecialChars";
 import del from "./parser/del";
 import header from "./parser/header";
 import list from "./parser/list";
@@ -11,6 +12,8 @@ import blockquotes from "./parser/blockquotes";
 export default function Ziz ( content ) {
     content += "\r\n";
     content = space( content );
+    content = escapeSpecialChars( content );
+    // TODO: fix this
     content = header( content );
     // TODO: fixed table
     content = table( content );
