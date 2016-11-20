@@ -19,8 +19,7 @@ export default ( content ) => {
     });
     /** inline code with ``` .* ``` */
     let arr = content.split( /\n/ );
-    let newContent = "";
-    arr.map( ( item, index ) => {
+    let newContent = arr.map( ( item, index ) => {
         for ( let i = 3; i >= 1; i-- ) {
             let inlineCode = `(\`{${i}})([^\`]{1,}.*?[^\`]*)(\`{${i}})`;
             let regex = new RegExp( inlineCode, "g" );
@@ -34,8 +33,7 @@ export default ( content ) => {
                 }
             });
         }
-        item += "\n";
-        newContent += item;
+        return item;
     });
-    return newContent;
+    return newContent.join( "\n" );
 };
