@@ -4,7 +4,7 @@
  * @return {[type]}         [description]s
  */
 export default ( content ) => {
-    let regex = /(^((&nbsp;)*>+(&nbsp;)*)+)(.*)([^>]$)/gm;         // (^>+(&nbsp;)*)+(.*)([^>]$)
+    let regex = /(^((\u0020)*>+(\u0020)*)+)(.*)([^>]$)/gm;         // (^>+(\u0020)*)+(.*)([^>]$)
     content = content.replace( regex, ( $0, $1, $2, $3, $4, $5, index, str ) => {
         let blockquoteStart = "<blockquotes>";
         let blockquoteEnd = "</blockquotes>";

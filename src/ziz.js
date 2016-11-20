@@ -11,7 +11,8 @@ import blockquotes from "./parser/blockquotes";
 
 export default function Ziz ( content ) {
     content += "\r\n";
-    content = space( content );
+    // content = space( content );
+    // TODO: delete space
     content = escapeSpecialChars( content );
     // TODO: fix this
     content = header( content );

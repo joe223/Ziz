@@ -8,15 +8,15 @@ export default ( content ) => {
     const ulEnd = "</ul>";
     const olStart = "<ol>";
     const olEnd = "</ol>";
-    const isUnorderedList = /(([\*|\+|\-])(&nbsp;)+)(.*?)$/;
-    const isOrderedList = /((^[\d]\.)(&nbsp;)+)(.*?)$/;
+    const isUnorderedList = /(([\*|\+|\-])(\u0020)+)(.*?)$/;
+    const isOrderedList = /((^[\d]\.)(\u0020)+)(.*?)$/;
     let arr = content.split( /\n/ );
 
     // unordered list
     let isFirstListItem = true;
     let length = arr.length;
-    console.log(arr);
-    console.log(isUnorderedList.test( arr[1] ));
+    // console.log(arr);
+    // console.log(isUnorderedList.test( arr[1] ));
 
     let newArr = arr.map( ( item, index, arr ) => {
         if ( isUnorderedList.test( item ) ) {

@@ -6,7 +6,7 @@
 export default ( content ) => {
     let arr = content.split( /\n/g );
     let isHTML = /^<[a-zA-Z0-9]{1,11}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,11}>$/;      // no globally
-    let isSpace = /^[\u0020]+|\r|\n$/;                                          // space & line break
+    let isSpace = /^\u0020+|\r|\n$/;                                          // space & line break
     let isCodeStart = /^(<pre>)?<code>$/;
     let isCodeEnd = /^<\/code>(<pre>)?/;
     let newContent = "";
