@@ -8,7 +8,7 @@
 
 export default ( content ) => {
     /** convert codeBlock */
-    let regCodeBlock = /(^(\u0020)*`{3}([a-zA-z]{3,10})?)((\n.*?)+)(`{3}$)/gm;
+    let regCodeBlock = /(^(\u0020)*`{3}(\w|\-|\.|\+|\-{1,10})?)((\n.*?)+)(`{3}$)/gm;
     let isCode = /\<code\>(.*?)\<\/code\>/;
     let hasLineBreak = /\r?\n/;
     content = content.replace( regCodeBlock, ( $0, $1, $2, $3, $4, $5, $6, index, str ) => {
