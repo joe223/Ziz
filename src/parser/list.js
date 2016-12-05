@@ -58,3 +58,24 @@ export default ( content ) => {
     content = newArr.join("\n");
     return content;
 };
+
+
+// isUnorderedList = (^(\t|(\u0020){4})*)((:?[\*|\+|\-])(:?\u0020)+)(.*?)$
+//
+//
+//
+// * asdfasdfasdfa是
+// + asdfasdfasdfa2
+// - asdfasdfasdfa1
+//
+// 1. 23123
+// 2. 23123
+//     * asdfasdfasdfa是
+//     + asdfasdfasdfa2
+// 		1. 23123
+// 		3. 23123
+//     - asdfasdfasdfa1
+// 3. 23123
+//
+//
+// (^(\t|(\u0020){4})*)((:?[\*\+\-])(:?\u0020)+)(.*?)$ // 匹配无序列表，
