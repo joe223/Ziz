@@ -25,7 +25,7 @@ export default ( content ) => {
         // }
         // item = item.replace( /\s/g, "" );           // TODO: should keep space
         if ( !isHTML.test( item ) && !isSpace.test( item ) && item !== "" ) {
-            str = `<p>${item}</p>`;
+            str = `<p>${ item }</p>`;
         } else {
             str = item;
         }

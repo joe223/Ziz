@@ -9,5 +9,7 @@ export default ( content ) => {
     // content = content.replace( /&/g, "&amp;" );
     content = content.replace( /"/g, "&quot;" );
     content = content.replace( /'/g, "&apos;" );
+    content = content.replace( /\\/g, "&bsol;" );
+    content = content.replace( /\//g, "&sol;" );
     return content;
 };

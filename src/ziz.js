@@ -3,6 +3,7 @@ import space from "./parser/space";
 import escapeSpecialChars from "./parser/escapeSpecialChars";
 import del from "./parser/del";
 import header from "./parser/header";
+import link from "./parser/link";
 import list from "./parser/list";
 import table from "./parser/table";
 import code from "./parser/code";
@@ -16,6 +17,7 @@ export default function Ziz ( content ) {
     content = escapeSpecialChars( content );
     // TODO: fix this
     content = header( content );
+    content = link( content );
     // TODO: fixed table
     content = table( content );
     content = code( content );
