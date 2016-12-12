@@ -63,6 +63,8 @@ export default ( content ) => {
         content = newArr.join("\n");
         return content;
     } else {
+        let arr = content.split( /\n/ );
+        let newArr = checkListItem( arr, 0 );
         return content;        
     }
     
@@ -77,6 +79,7 @@ function checkListItem ( arr, indent ) {
     });
     return newArr;
 }
+
 
 // isUnorderedList = (^(\t|(\u0020){4})*)((?:[\*|\+|\-])(?:\u0020)+)(.*?)$
 //

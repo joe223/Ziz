@@ -1,2 +1,1283 @@
-!function(t,n){"object"==typeof exports&&"undefined"!=typeof module?module.exports=n():"function"==typeof define&&define.amd?define(n):t.Ziz=n()}(this,function(){"use strict";function t(t){return t&&t.__esModule?t.default:t}function n(t,n){return n={exports:{}},t(n,n.exports),n.exports}function e(t){return t+="\r\n",t=o(t),t=i(t),t=f(t),t=zr(t),t=Dr(t),t=qr(t),t=Gr(t),t=u(t),t=Jr(t)}var r={highlightCode:!1,header:!0,table:!0,list:!0,space:!1,useNestedList:!0},o=function(t){return t=t.replace(/</g,"&lt;"),t=t.replace(/>/g,"&gt;"),t=t.replace(/"/g,"&quot;"),t=t.replace(/'/g,"&apos;"),t=t.replace(/\\/g,"&bsol;"),t=t.replace(/\//g,"&sol;")},u=function(t){var n=/~~(?!~)(.*)?~~/m;return t=t.replace(n,function(t,n,e){return"<del>"+e+"</del>"})},i=function(t){for(var n=/^(.*)\r?\n(={5,})$/gm,e=/^(.*)\r?\n(-{5,})$/gm,r=function(n){var e="^(#{"+n+"})([^#].*?)((#{1,})?$)",r=new RegExp(e,"gm");t=t.replace(r,function(t,e,r,o,u){return"<h"+n+">"+r+"</h"+n+">"})},o=6;o>=1;o--)r(o);return t=t.replace(n,function(t,n,e,r,o){return"<h1>"+n+"</h1>"}),t=t.replace(e,function(t,n,e,r,o){return"<h2>"+n+"</h2>"})},f=function(t){var n=/\[([^\[].*?)\]\((.*?)((?:\u0020*)&quot;(.*?)&quot;)?\)/gm;return t=t.replace(n,function(t,n,e,r,o){var u=n,i=e,f=o;return'<a href="'+i+'" title="'+f+'">'+u+"</a>"})},c=Math.ceil,a=Math.floor,l=function(t){return isNaN(t=+t)?0:(t>0?a:c)(t)},s=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t},p=l,y=s,h=function(t){return function(n,e){var r,o,u=String(y(n)),i=p(e),f=u.length;return i<0||i>=f?t?"":void 0:(r=u.charCodeAt(i),r<55296||r>56319||i+1===f||(o=u.charCodeAt(i+1))<56320||o>57343?t?u.charAt(i):r:t?u.slice(i,i+2):(r-55296<<10)+(o-56320)+65536)}},d=!0,v=n(function(t){var n=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=n)}),g=n(function(t){var n=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=n)}),b=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t},m=b,O=function(t,n,e){if(m(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}},w=function(t){return"object"==typeof t?null!==t:"function"==typeof t},S=w,_=function(t){if(!S(t))throw TypeError(t+" is not an object!");return t},j=function(t){try{return!!t()}catch(t){return!0}},E=!j(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a}),P=w,M=v.document,k=P(M)&&P(M.createElement),x=function(t){return k?M.createElement(t):{}},A=!E&&!j(function(){return 7!=Object.defineProperty(x("div"),"a",{get:function(){return 7}}).a}),N=w,F=function(t,n){if(!N(t))return t;var e,r;if(n&&"function"==typeof(e=t.toString)&&!N(r=e.call(t)))return r;if("function"==typeof(e=t.valueOf)&&!N(r=e.call(t)))return r;if(!n&&"function"==typeof(e=t.toString)&&!N(r=e.call(t)))return r;throw TypeError("Can't convert object to primitive value")},T=_,I=A,C=F,L=Object.defineProperty,$=E?Object.defineProperty:function(t,n,e){if(T(t),n=C(n,!0),T(e),I)try{return L(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t},R={f:$},W=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}},q=R,z=W,D=E?function(t,n,e){return q.f(t,n,z(1,e))}:function(t,n,e){return t[n]=e,t},J=v,G=g,K=O,Z=D,B="prototype",Y=function(t,n,e){var r,o,u,i=t&Y.F,f=t&Y.G,c=t&Y.S,a=t&Y.P,l=t&Y.B,s=t&Y.W,p=f?G:G[n]||(G[n]={}),y=p[B],h=f?J:c?J[n]:(J[n]||{})[B];f&&(e=n);for(r in e)o=!i&&h&&void 0!==h[r],o&&r in p||(u=o?h[r]:e[r],p[r]=f&&"function"!=typeof h[r]?e[r]:l&&o?K(u,J):s&&h[r]==u?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[B]=t[B],n}(u):a&&"function"==typeof u?K(Function.call,u):u,a&&((p.virtual||(p.virtual={}))[r]=u,t&Y.R&&y&&!y[r]&&Z(y,r,u)))};Y.F=1,Y.G=2,Y.S=4,Y.P=8,Y.B=16,Y.W=32,Y.U=64,Y.R=128;var Q=Y,U=D,H={}.hasOwnProperty,V=function(t,n){return H.call(t,n)},X={},tt={}.toString,nt=function(t){return tt.call(t).slice(8,-1)},et=nt,rt=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==et(t)?t.split(""):Object(t)},ot=rt,ut=s,it=function(t){return ot(ut(t))},ft=l,ct=Math.min,at=function(t){return t>0?ct(ft(t),9007199254740991):0},lt=l,st=Math.max,pt=Math.min,yt=function(t,n){return t=lt(t),t<0?st(t+n,0):pt(t,n)},ht=it,dt=at,vt=yt,gt=function(t){return function(n,e,r){var o,u=ht(n),i=dt(u.length),f=vt(r,i);if(t&&e!=e){for(;i>f;)if(o=u[f++],o!=o)return!0}else for(;i>f;f++)if((t||f in u)&&u[f]===e)return t||f||0;return!t&&-1}},bt=v,mt="__core-js_shared__",Ot=bt[mt]||(bt[mt]={}),wt=function(t){return Ot[t]||(Ot[t]={})},St=0,_t=Math.random(),jt=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++St+_t).toString(36))},Et=wt("keys"),Pt=jt,Mt=function(t){return Et[t]||(Et[t]=Pt(t))},kt=V,xt=it,At=gt(!1),Nt=Mt("IE_PROTO"),Ft=function(t,n){var e,r=xt(t),o=0,u=[];for(e in r)e!=Nt&&kt(r,e)&&u.push(e);for(;n.length>o;)kt(r,e=n[o++])&&(~At(u,e)||u.push(e));return u},Tt="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(","),It=Ft,Ct=Tt,Lt=Object.keys||function(t){return It(t,Ct)},$t=R,Rt=_,Wt=Lt,qt=E?Object.defineProperties:function(t,n){Rt(t);for(var e,r=Wt(n),o=r.length,u=0;o>u;)$t.f(t,e=r[u++],n[e]);return t},zt=v.document&&document.documentElement,Dt=_,Jt=qt,Gt=Tt,Kt=Mt("IE_PROTO"),Zt=function(){},Bt="prototype",Yt=function(){var t,n=x("iframe"),e=Gt.length,r="<",o=">";for(n.style.display="none",zt.appendChild(n),n.src="javascript:",t=n.contentWindow.document,t.open(),t.write(r+"script"+o+"document.F=Object"+r+"/script"+o),t.close(),Yt=t.F;e--;)delete Yt[Bt][Gt[e]];return Yt()},Qt=Object.create||function(t,n){var e;return null!==t?(Zt[Bt]=Dt(t),e=new Zt,Zt[Bt]=null,e[Kt]=t):e=Yt(),void 0===n?e:Jt(e,n)},Ut=n(function(t){var n=wt("wks"),e=jt,r=v.Symbol,o="function"==typeof r,u=t.exports=function(t){return n[t]||(n[t]=o&&r[t]||(o?r:e)("Symbol."+t))};u.store=n}),Ht=R.f,Vt=V,Xt=Ut("toStringTag"),tn=function(t,n,e){t&&!Vt(t=e?t:t.prototype,Xt)&&Ht(t,Xt,{configurable:!0,value:n})},nn=Qt,en=W,rn=tn,on={};D(on,Ut("iterator"),function(){return this});var un=function(t,n,e){t.prototype=nn(on,{next:en(1,e)}),rn(t,n+" Iterator")},fn=s,cn=function(t){return Object(fn(t))},an=V,ln=cn,sn=Mt("IE_PROTO"),pn=Object.prototype,yn=Object.getPrototypeOf||function(t){return t=ln(t),an(t,sn)?t[sn]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?pn:null},hn=d,dn=Q,vn=U,gn=D,bn=V,mn=X,On=un,wn=tn,Sn=yn,_n=Ut("iterator"),jn=!([].keys&&"next"in[].keys()),En="@@iterator",Pn="keys",Mn="values",kn=function(){return this},xn=function(t,n,e,r,o,u,i){On(e,n,r);var f,c,a,l=function(t){if(!jn&&t in h)return h[t];switch(t){case Pn:return function(){return new e(this,t)};case Mn:return function(){return new e(this,t)}}return function(){return new e(this,t)}},s=n+" Iterator",p=o==Mn,y=!1,h=t.prototype,d=h[_n]||h[En]||o&&h[o],v=d||l(o),g=o?p?l("entries"):v:void 0,b="Array"==n?h.entries||d:d;if(b&&(a=Sn(b.call(new t)),a!==Object.prototype&&(wn(a,s,!0),hn||bn(a,_n)||gn(a,_n,kn))),p&&d&&d.name!==Mn&&(y=!0,v=function(){return d.call(this)}),hn&&!i||!jn&&!y&&h[_n]||gn(h,_n,v),mn[n]=v,mn[s]=kn,o)if(f={values:p?v:l(Mn),keys:u?v:l(Pn),entries:g},i)for(c in f)c in h||vn(h,c,f[c]);else dn(dn.P+dn.F*(jn||y),n,f);return f},An=h(!0);xn(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,n=this._t,e=this._i;return e>=n.length?{value:void 0,done:!0}:(t=An(n,e),this._i+=t.length,{value:t,done:!1})});var Nn=function(){},Fn=function(t,n){return{value:n,done:!!t}},Tn=Nn,In=Fn,Cn=X,Ln=it;xn(Array,"Array",function(t,n){this._t=Ln(t),this._i=0,this._k=n},function(){var t=this._t,n=this._k,e=this._i++;return!t||e>=t.length?(this._t=void 0,In(1)):"keys"==n?In(0,e):"values"==n?In(0,t[e]):In(0,[e,t[e]])},"values");Cn.Arguments=Cn.Array,Tn("keys"),Tn("values"),Tn("entries");for(var $n=v,Rn=D,Wn=X,qn=Ut("toStringTag"),zn=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],Dn=0;Dn<5;Dn++){var Jn=zn[Dn],Gn=$n[Jn],Kn=Gn&&Gn.prototype;Kn&&!Kn[qn]&&Rn(Kn,qn,Jn),Wn[Jn]=Wn.Array}var Zn=Ut,Bn={f:Zn},Yn=Bn.f("iterator"),Qn=n(function(t){t.exports={default:Yn,__esModule:!0}}),Un=n(function(t){var n=jt("meta"),e=w,r=V,o=R.f,u=0,i=Object.isExtensible||function(){return!0},f=!j(function(){return i(Object.preventExtensions({}))}),c=function(t){o(t,n,{value:{i:"O"+ ++u,w:{}}})},a=function(t,o){if(!e(t))return"symbol"==typeof t?t:("string"==typeof t?"S":"P")+t;if(!r(t,n)){if(!i(t))return"F";if(!o)return"E";c(t)}return t[n].i},l=function(t,e){if(!r(t,n)){if(!i(t))return!0;if(!e)return!1;c(t)}return t[n].w},s=function(t){return f&&p.NEED&&i(t)&&!r(t,n)&&c(t),t},p=t.exports={KEY:n,NEED:!1,fastKey:a,getWeak:l,onFreeze:s}}),Hn=v,Vn=g,Xn=d,te=Bn,ne=R.f,ee=function(t){var n=Vn.Symbol||(Vn.Symbol=Xn?{}:Hn.Symbol||{});"_"==t.charAt(0)||t in n||ne(n,t,{value:te.f(t)})},re=Lt,oe=it,ue=function(t,n){for(var e,r=oe(t),o=re(r),u=o.length,i=0;u>i;)if(r[e=o[i++]]===n)return e},ie=Object.getOwnPropertySymbols,fe={f:ie},ce={}.propertyIsEnumerable,ae={f:ce},le=Lt,se=fe,pe=ae,ye=function(t){var n=le(t),e=se.f;if(e)for(var r,o=e(t),u=pe.f,i=0;o.length>i;)u.call(t,r=o[i++])&&n.push(r);return n},he=nt,de=Array.isArray||function(t){return"Array"==he(t)},ve=Ft,ge=Tt.concat("length","prototype"),be=Object.getOwnPropertyNames||function(t){return ve(t,ge)},me={f:be},Oe=it,we=me.f,Se={}.toString,_e="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],je=function(t){try{return we(t)}catch(t){return _e.slice()}},Ee=function(t){return _e&&"[object Window]"==Se.call(t)?je(t):we(Oe(t))},Pe={f:Ee},Me=ae,ke=W,xe=it,Ae=F,Ne=V,Fe=A,Te=Object.getOwnPropertyDescriptor,Ie=E?Te:function(t,n){if(t=xe(t),n=Ae(n,!0),Fe)try{return Te(t,n)}catch(t){}if(Ne(t,n))return ke(!Me.f.call(t,n),t[n])},Ce={f:Ie},Le=v,$e=V,Re=E,We=Q,qe=U,ze=Un.KEY,De=j,Je=wt,Ge=tn,Ke=jt,Ze=Ut,Be=Bn,Ye=ee,Qe=ue,Ue=ye,He=de,Ve=_,Xe=it,tr=F,nr=W,er=Qt,rr=Pe,or=Ce,ur=R,ir=Lt,fr=or.f,cr=ur.f,ar=rr.f,lr=Le.Symbol,sr=Le.JSON,pr=sr&&sr.stringify,yr="prototype",hr=Ze("_hidden"),dr=Ze("toPrimitive"),vr={}.propertyIsEnumerable,gr=Je("symbol-registry"),br=Je("symbols"),mr=Je("op-symbols"),Or=Object[yr],wr="function"==typeof lr,Sr=Le.QObject,_r=!Sr||!Sr[yr]||!Sr[yr].findChild,jr=Re&&De(function(){return 7!=er(cr({},"a",{get:function(){return cr(this,"a",{value:7}).a}})).a})?function(t,n,e){var r=fr(Or,n);r&&delete Or[n],cr(t,n,e),r&&t!==Or&&cr(Or,n,r)}:cr,Er=function(t){var n=br[t]=er(lr[yr]);return n._k=t,n},Pr=wr&&"symbol"==typeof lr.iterator?function(t){return"symbol"==typeof t}:function(t){return t instanceof lr},Mr=function(t,n,e){return t===Or&&Mr(mr,n,e),Ve(t),n=tr(n,!0),Ve(e),$e(br,n)?(e.enumerable?($e(t,hr)&&t[hr][n]&&(t[hr][n]=!1),e=er(e,{enumerable:nr(0,!1)})):($e(t,hr)||cr(t,hr,nr(1,{})),t[hr][n]=!0),jr(t,n,e)):cr(t,n,e)},kr=function(t,n){Ve(t);for(var e,r=Ue(n=Xe(n)),o=0,u=r.length;u>o;)Mr(t,e=r[o++],n[e]);return t},xr=function(t,n){return void 0===n?er(t):kr(er(t),n)},Ar=function(t){var n=vr.call(this,t=tr(t,!0));return!(this===Or&&$e(br,t)&&!$e(mr,t))&&(!(n||!$e(this,t)||!$e(br,t)||$e(this,hr)&&this[hr][t])||n)},Nr=function(t,n){if(t=Xe(t),n=tr(n,!0),t!==Or||!$e(br,n)||$e(mr,n)){var e=fr(t,n);return!e||!$e(br,n)||$e(t,hr)&&t[hr][n]||(e.enumerable=!0),e}},Fr=function(t){for(var n,e=ar(Xe(t)),r=[],o=0;e.length>o;)$e(br,n=e[o++])||n==hr||n==ze||r.push(n);return r},Tr=function(t){for(var n,e=t===Or,r=ar(e?mr:Xe(t)),o=[],u=0;r.length>u;)!$e(br,n=r[u++])||e&&!$e(Or,n)||o.push(br[n]);return o};wr||(lr=function(){if(this instanceof lr)throw TypeError("Symbol is not a constructor!");var t=Ke(arguments.length>0?arguments[0]:void 0),n=function(e){this===Or&&n.call(mr,e),$e(this,hr)&&$e(this[hr],t)&&(this[hr][t]=!1),jr(this,t,nr(1,e))};return Re&&_r&&jr(Or,t,{configurable:!0,set:n}),Er(t)},qe(lr[yr],"toString",function(){return this._k}),or.f=Nr,ur.f=Mr,me.f=rr.f=Fr,ae.f=Ar,fe.f=Tr,Re&&!d&&qe(Or,"propertyIsEnumerable",Ar,!0),Be.f=function(t){return Er(Ze(t))}),We(We.G+We.W+We.F*!wr,{Symbol:lr});for(var Ir="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),Cr=0;Ir.length>Cr;)Ze(Ir[Cr++]);for(var Ir=ir(Ze.store),Cr=0;Ir.length>Cr;)Ye(Ir[Cr++]);We(We.S+We.F*!wr,"Symbol",{for:function(t){return $e(gr,t+="")?gr[t]:gr[t]=lr(t)},keyFor:function(t){if(Pr(t))return Qe(gr,t);throw TypeError(t+" is not a symbol!")},useSetter:function(){_r=!0},useSimple:function(){_r=!1}}),We(We.S+We.F*!wr,"Object",{create:xr,defineProperty:Mr,defineProperties:kr,getOwnPropertyDescriptor:Nr,getOwnPropertyNames:Fr,getOwnPropertySymbols:Tr}),sr&&We(We.S+We.F*(!wr||De(function(){var t=lr();return"[null]"!=pr([t])||"{}"!=pr({a:t})||"{}"!=pr(Object(t))})),"JSON",{stringify:function(t){if(void 0!==t&&!Pr(t)){for(var n,e,r=[t],o=1;arguments.length>o;)r.push(arguments[o++]);return n=r[1],"function"==typeof n&&(e=n),!e&&He(n)||(n=function(t,n){if(e&&(n=e.call(this,t,n)),!Pr(n))return n}),r[1]=n,pr.apply(sr,r)}}}),lr[yr][dr]||D(lr[yr],dr,lr[yr].valueOf),Ge(lr,"Symbol"),Ge(Math,"Math",!0),Ge(Le.JSON,"JSON",!0),ee("asyncIterator"),ee("observable");var Lr=g.Symbol,$r=n(function(t){t.exports={default:Lr,__esModule:!0}}),Rr=n(function(t,n){function e(t){return t&&t.__esModule?t:{default:t}}n.__esModule=!0;var r=Qn,o=e(r),u=$r,i=e(u),f="function"==typeof i.default&&"symbol"==typeof o.default?function(t){return typeof t}:function(t){return t&&"function"==typeof i.default&&t.constructor===i.default&&t!==i.default.prototype?"symbol":typeof t};n.default="function"==typeof i.default&&"symbol"===f(o.default)?function(t){return"undefined"==typeof t?"undefined":f(t)}:function(t){return t&&"function"==typeof i.default&&t.constructor===i.default&&t!==i.default.prototype?"symbol":"undefined"==typeof t?"undefined":f(t)}}),Wr=t(Rr),qr=function(t){var n="<ul>",e="</ul>",o="<ol>",u="</ol>";if(r.useNestedList)return t;var i=function(){var r=/(([\*|\+|\-])(\u0020)+)(.*?)$/,i=/((^[\d]\.)(\u0020)+)(.*?)$/,f=t.split(/\n/),c=!0,a=f.length,l=f.map(function(t,o,u){return r.test(t)?(t=t.replace(r,function(t,n,e,r,o,u,i){return"<li>"+o+"</li>"}),c&&(t=n+t),o!==a-1&&r.test(u[o+1])||(t+=e),c=!1):c=!0,t});return c=!1,l=l.map(function(t,n,e){return i.test(t)?(t=t.replace(i,function(t,n,e,r,o,u,i){return"<li>"+o+"</li>"}),c||(t=o+t),e[n+1]&&i.test(e[n+1])||(t+=u),c=!0):c=!1,t}),t=l.join("\n"),{v:t}}();return"object"===("undefined"==typeof i?"undefined":Wr(i))?i.v:void 0},zr=function(t){return t},Dr=function(t){var n=/(^(\u0020)*`{3}(\w|\-|\.|\+|\-{1,10})?)((\n.*?)+)(`{3}$)/gm,e=/\<code\>(.*?)\<\/code\>/,r=/\r?\n/;t=t.replace(n,function(t,n,e,r,o,u,i,f,c){var a=o,l=r?r.toLowerCase():"nohighlight";return a="<pre><code class='"+l+"'>"+a+"</code></pre>"});var o=t.split(/\n/),u=o.map(function(t,n){for(var o=3;o>=1;o--){var u="(`{"+o+"})([^`]{1,}.*?[^`]*)(`{"+o+"})",i=new RegExp(u,"g");t=t.replace(i,function(t,n,o,u,i,f){var c=o;return!e.test(c)&&o.length>0&&!r.test(c)?c="<code>"+c+"</code>":t})}return t});return u.join("\n")},Jr=function(t){var n=t.split(/\n/),e=/^<[a-zA-Z0-9]{1,11}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,11}>$/,r=/^\u0020+|\r|\n$/,o=n.map(function(t,n,o){var u="";return u=e.test(t)||r.test(t)||""===t?t:"<p>"+t+"</p>"});return o=o.join("\n")},Gr=function(t){var n=/(^((\u0020)*>+(\u0020)*)+)(.*)([^>]$)/gm;return t=t.replace(n,function(t,n,e,r,o,u,i,f){for(var c="<blockquotes>",a="</blockquotes>",l=0,s=/>/g;s.test(n);)l++;return""+c.repeat(l)+u+a.repeat(l)})};return e});
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.Ziz = factory());
+}(this, (function () { 'use strict';
+
+var config = {
+    highlightCode: false,
+    header: true,
+    table: true,
+    list: true,
+    space: false,
+    useNestedList: true
+};
+
+var escapeSpecialChars = (function (content) {
+    content = content.replace(/</g, "&lt;");
+    content = content.replace(/>/g, "&gt;");
+
+    content = content.replace(/"/g, "&quot;");
+    content = content.replace(/'/g, "&apos;");
+    content = content.replace(/\\/g, "&bsol;");
+    content = content.replace(/\//g, "&sol;");
+    return content;
+});
+
+var del = (function (content) {
+    var reg = /~~(?!~)(.*)?~~/m;
+    content = content.replace(reg, function ($0, $1, $2) {
+        return "<del>" + $2 + "</del>";
+    });
+    return content;
+});
+
+var header = (function (content) {
+    var setextHeader1 = /^(.*)\r?\n(={5,})$/gm;
+    var setextHeader2 = /^(.*)\r?\n(-{5,})$/gm;
+    var _loop = function _loop(i) {
+        var atx = "^(#{" + i + "})([^#].*?)((#{1,})?$)";
+        var regex = new RegExp(atx, "gm");
+        content = content.replace(regex, function ($0, $1, $2, index, str) {
+            return "<h" + i + ">" + $2 + "</h" + i + ">";
+        });
+    };
+
+    for (var i = 6; i >= 1; i--) {
+        _loop(i);
+    }
+    content = content.replace(setextHeader1, function ($0, $1, $2, index, str) {
+        return "<h1>" + $1 + "</h1>";
+    });
+    content = content.replace(setextHeader2, function ($0, $1, $2, index, str) {
+        return "<h2>" + $1 + "</h2>";
+    });
+    return content;
+});
+
+var link = (function (content) {
+    var inlineLinkRegex = /\[([^\[].*?)\]\((.*?)((?:\u0020*)&quot;(.*?)&quot;)?\)/gm;
+    content = content.replace(inlineLinkRegex, function ($0, $1, $2, $3, $4) {
+        var text = $1;
+        var url = $2;
+        var title = $4;
+        return "<a href=\"" + url + "\" title=\"" + title + "\">" + text + "</a>";
+    });
+
+    return content;
+});
+
+function unwrapExports (x) {
+	return x && x.__esModule ? x['default'] : x;
+}
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+// 7.1.4 ToInteger
+var ceil  = Math.ceil;
+var floor = Math.floor;
+var _toInteger = function(it){
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+// 7.2.1 RequireObjectCoercible(argument)
+var _defined = function(it){
+  if(it == undefined)throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+var toInteger = _toInteger;
+var defined   = _defined;
+// true  -> String#at
+// false -> String#codePointAt
+var _stringAt = function(TO_STRING){
+  return function(that, pos){
+    var s = String(defined(that))
+      , i = toInteger(pos)
+      , l = s.length
+      , a, b;
+    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+    a = s.charCodeAt(i);
+    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+      ? TO_STRING ? s.charAt(i) : a
+      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+  };
+};
+
+var _library = true;
+
+var _global = createCommonjsModule(function (module) {
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+});
+
+var _core = createCommonjsModule(function (module) {
+var core = module.exports = {version: '2.4.0'};
+if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+});
+
+var _aFunction = function(it){
+  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+  return it;
+};
+
+// optional / simple context binding
+var aFunction = _aFunction;
+var _ctx = function(fn, that, length){
+  aFunction(fn);
+  if(that === undefined)return fn;
+  switch(length){
+    case 1: return function(a){
+      return fn.call(that, a);
+    };
+    case 2: return function(a, b){
+      return fn.call(that, a, b);
+    };
+    case 3: return function(a, b, c){
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function(/* ...args */){
+    return fn.apply(that, arguments);
+  };
+};
+
+var _isObject = function(it){
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+var isObject = _isObject;
+var _anObject = function(it){
+  if(!isObject(it))throw TypeError(it + ' is not an object!');
+  return it;
+};
+
+var _fails = function(exec){
+  try {
+    return !!exec();
+  } catch(e){
+    return true;
+  }
+};
+
+// Thank's IE8 for his funny defineProperty
+var _descriptors = !_fails(function(){
+  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+});
+
+var isObject$1 = _isObject;
+var document$1 = _global.document;
+var is = isObject$1(document$1) && isObject$1(document$1.createElement);
+var _domCreate = function(it){
+  return is ? document$1.createElement(it) : {};
+};
+
+var _ie8DomDefine = !_descriptors && !_fails(function(){
+  return Object.defineProperty(_domCreate('div'), 'a', {get: function(){ return 7; }}).a != 7;
+});
+
+// 7.1.1 ToPrimitive(input [, PreferredType])
+var isObject$2 = _isObject;
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+var _toPrimitive = function(it, S){
+  if(!isObject$2(it))return it;
+  var fn, val;
+  if(S && typeof (fn = it.toString) == 'function' && !isObject$2(val = fn.call(it)))return val;
+  if(typeof (fn = it.valueOf) == 'function' && !isObject$2(val = fn.call(it)))return val;
+  if(!S && typeof (fn = it.toString) == 'function' && !isObject$2(val = fn.call(it)))return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+var anObject       = _anObject;
+var IE8_DOM_DEFINE = _ie8DomDefine;
+var toPrimitive    = _toPrimitive;
+var dP$1             = Object.defineProperty;
+
+var f = _descriptors ? Object.defineProperty : function defineProperty(O, P, Attributes){
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if(IE8_DOM_DEFINE)try {
+    return dP$1(O, P, Attributes);
+  } catch(e){ /* empty */ }
+  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
+  if('value' in Attributes)O[P] = Attributes.value;
+  return O;
+};
+
+var _objectDp = {
+	f: f
+};
+
+var _propertyDesc = function(bitmap, value){
+  return {
+    enumerable  : !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable    : !(bitmap & 4),
+    value       : value
+  };
+};
+
+var dP         = _objectDp;
+var createDesc = _propertyDesc;
+var _hide = _descriptors ? function(object, key, value){
+  return dP.f(object, key, createDesc(1, value));
+} : function(object, key, value){
+  object[key] = value;
+  return object;
+};
+
+var global$1    = _global;
+var core      = _core;
+var ctx       = _ctx;
+var hide$1      = _hide;
+var PROTOTYPE = 'prototype';
+
+var $export$1 = function(type, name, source){
+  var IS_FORCED = type & $export$1.F
+    , IS_GLOBAL = type & $export$1.G
+    , IS_STATIC = type & $export$1.S
+    , IS_PROTO  = type & $export$1.P
+    , IS_BIND   = type & $export$1.B
+    , IS_WRAP   = type & $export$1.W
+    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
+    , expProto  = exports[PROTOTYPE]
+    , target    = IS_GLOBAL ? global$1 : IS_STATIC ? global$1[name] : (global$1[name] || {})[PROTOTYPE]
+    , key, own, out;
+  if(IS_GLOBAL)source = name;
+  for(key in source){
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined;
+    if(own && key in exports)continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global$1)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function(C){
+      var F = function(a, b, c){
+        if(this instanceof C){
+          switch(arguments.length){
+            case 0: return new C;
+            case 1: return new C(a);
+            case 2: return new C(a, b);
+          } return new C(a, b, c);
+        } return C.apply(this, arguments);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+    if(IS_PROTO){
+      (exports.virtual || (exports.virtual = {}))[key] = out;
+      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+      if(type & $export$1.R && expProto && !expProto[key])hide$1(expProto, key, out);
+    }
+  }
+};
+// type bitmap
+$export$1.F = 1;   // forced
+$export$1.G = 2;   // global
+$export$1.S = 4;   // static
+$export$1.P = 8;   // proto
+$export$1.B = 16;  // bind
+$export$1.W = 32;  // wrap
+$export$1.U = 64;  // safe
+$export$1.R = 128; // real proto method for `library` 
+var _export = $export$1;
+
+var _redefine = _hide;
+
+var hasOwnProperty = {}.hasOwnProperty;
+var _has = function(it, key){
+  return hasOwnProperty.call(it, key);
+};
+
+var _iterators = {};
+
+var toString$1 = {}.toString;
+
+var _cof = function(it){
+  return toString$1.call(it).slice(8, -1);
+};
+
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = _cof;
+var _iobject = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = _iobject;
+var defined$1 = _defined;
+var _toIobject = function(it){
+  return IObject(defined$1(it));
+};
+
+// 7.1.15 ToLength
+var toInteger$1 = _toInteger;
+var min       = Math.min;
+var _toLength = function(it){
+  return it > 0 ? min(toInteger$1(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+};
+
+var toInteger$2 = _toInteger;
+var max       = Math.max;
+var min$1       = Math.min;
+var _toIndex = function(index, length){
+  index = toInteger$2(index);
+  return index < 0 ? max(index + length, 0) : min$1(index, length);
+};
+
+// false -> Array#indexOf
+// true  -> Array#includes
+var toIObject$1 = _toIobject;
+var toLength  = _toLength;
+var toIndex   = _toIndex;
+var _arrayIncludes = function(IS_INCLUDES){
+  return function($this, el, fromIndex){
+    var O      = toIObject$1($this)
+      , length = toLength(O.length)
+      , index  = toIndex(fromIndex, length)
+      , value;
+    // Array#includes uses SameValueZero equality algorithm
+    if(IS_INCLUDES && el != el)while(length > index){
+      value = O[index++];
+      if(value != value)return true;
+    // Array#toIndex ignores holes, Array#includes - not
+    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
+      if(O[index] === el)return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
+
+var global$2 = _global;
+var SHARED = '__core-js_shared__';
+var store  = global$2[SHARED] || (global$2[SHARED] = {});
+var _shared = function(key){
+  return store[key] || (store[key] = {});
+};
+
+var id = 0;
+var px = Math.random();
+var _uid = function(key){
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+var shared = _shared('keys');
+var uid    = _uid;
+var _sharedKey = function(key){
+  return shared[key] || (shared[key] = uid(key));
+};
+
+var has$1          = _has;
+var toIObject    = _toIobject;
+var arrayIndexOf = _arrayIncludes(false);
+var IE_PROTO$1     = _sharedKey('IE_PROTO');
+
+var _objectKeysInternal = function(object, names){
+  var O      = toIObject(object)
+    , i      = 0
+    , result = []
+    , key;
+  for(key in O)if(key != IE_PROTO$1)has$1(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while(names.length > i)if(has$1(O, key = names[i++])){
+    ~arrayIndexOf(result, key) || result.push(key);
+  }
+  return result;
+};
+
+// IE 8- don't enum bug keys
+var _enumBugKeys = (
+  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+).split(',');
+
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys       = _objectKeysInternal;
+var enumBugKeys$1 = _enumBugKeys;
+
+var _objectKeys = Object.keys || function keys(O){
+  return $keys(O, enumBugKeys$1);
+};
+
+var dP$2       = _objectDp;
+var anObject$2 = _anObject;
+var getKeys  = _objectKeys;
+
+var _objectDps = _descriptors ? Object.defineProperties : function defineProperties(O, Properties){
+  anObject$2(O);
+  var keys   = getKeys(Properties)
+    , length = keys.length
+    , i = 0
+    , P;
+  while(length > i)dP$2.f(O, P = keys[i++], Properties[P]);
+  return O;
+};
+
+var _html = _global.document && document.documentElement;
+
+// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+var anObject$1    = _anObject;
+var dPs         = _objectDps;
+var enumBugKeys = _enumBugKeys;
+var IE_PROTO    = _sharedKey('IE_PROTO');
+var Empty       = function(){ /* empty */ };
+var PROTOTYPE$1   = 'prototype';
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var createDict = function(){
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = _domCreate('iframe')
+    , i      = enumBugKeys.length
+    , lt     = '<'
+    , gt     = '>'
+    , iframeDocument;
+  iframe.style.display = 'none';
+  _html.appendChild(iframe);
+  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+  // createDict = iframe.contentWindow.Object;
+  // html.removeChild(iframe);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+  iframeDocument.close();
+  createDict = iframeDocument.F;
+  while(i--)delete createDict[PROTOTYPE$1][enumBugKeys[i]];
+  return createDict();
+};
+
+var _objectCreate = Object.create || function create(O, Properties){
+  var result;
+  if(O !== null){
+    Empty[PROTOTYPE$1] = anObject$1(O);
+    result = new Empty;
+    Empty[PROTOTYPE$1] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = createDict();
+  return Properties === undefined ? result : dPs(result, Properties);
+};
+
+var _wks = createCommonjsModule(function (module) {
+var store      = _shared('wks')
+  , uid        = _uid
+  , Symbol     = _global.Symbol
+  , USE_SYMBOL = typeof Symbol == 'function';
+
+var $exports = module.exports = function(name){
+  return store[name] || (store[name] =
+    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+};
+
+$exports.store = store;
+});
+
+var def = _objectDp.f;
+var has$2 = _has;
+var TAG = _wks('toStringTag');
+
+var _setToStringTag = function(it, tag, stat){
+  if(it && !has$2(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
+};
+
+var create$1         = _objectCreate;
+var descriptor     = _propertyDesc;
+var setToStringTag$1 = _setToStringTag;
+var IteratorPrototype = {};
+
+// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+_hide(IteratorPrototype, _wks('iterator'), function(){ return this; });
+
+var _iterCreate = function(Constructor, NAME, next){
+  Constructor.prototype = create$1(IteratorPrototype, {next: descriptor(1, next)});
+  setToStringTag$1(Constructor, NAME + ' Iterator');
+};
+
+// 7.1.13 ToObject(argument)
+var defined$2 = _defined;
+var _toObject = function(it){
+  return Object(defined$2(it));
+};
+
+// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+var has$3         = _has;
+var toObject    = _toObject;
+var IE_PROTO$2    = _sharedKey('IE_PROTO');
+var ObjectProto = Object.prototype;
+
+var _objectGpo = Object.getPrototypeOf || function(O){
+  O = toObject(O);
+  if(has$3(O, IE_PROTO$2))return O[IE_PROTO$2];
+  if(typeof O.constructor == 'function' && O instanceof O.constructor){
+    return O.constructor.prototype;
+  } return O instanceof Object ? ObjectProto : null;
+};
+
+var LIBRARY        = _library;
+var $export        = _export;
+var redefine       = _redefine;
+var hide           = _hide;
+var has            = _has;
+var Iterators      = _iterators;
+var $iterCreate    = _iterCreate;
+var setToStringTag = _setToStringTag;
+var getPrototypeOf = _objectGpo;
+var ITERATOR       = _wks('iterator');
+var BUGGY          = !([].keys && 'next' in [].keys());
+var FF_ITERATOR    = '@@iterator';
+var KEYS           = 'keys';
+var VALUES         = 'values';
+
+var returnThis = function(){ return this; };
+
+var _iterDefine = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
+  $iterCreate(Constructor, NAME, next);
+  var getMethod = function(kind){
+    if(!BUGGY && kind in proto)return proto[kind];
+    switch(kind){
+      case KEYS: return function keys(){ return new Constructor(this, kind); };
+      case VALUES: return function values(){ return new Constructor(this, kind); };
+    } return function entries(){ return new Constructor(this, kind); };
+  };
+  var TAG        = NAME + ' Iterator'
+    , DEF_VALUES = DEFAULT == VALUES
+    , VALUES_BUG = false
+    , proto      = Base.prototype
+    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
+    , $default   = $native || getMethod(DEFAULT)
+    , $entries   = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined
+    , $anyNative = NAME == 'Array' ? proto.entries || $native : $native
+    , methods, key, IteratorPrototype;
+  // Fix native
+  if($anyNative){
+    IteratorPrototype = getPrototypeOf($anyNative.call(new Base));
+    if(IteratorPrototype !== Object.prototype){
+      // Set @@toStringTag to native iterators
+      setToStringTag(IteratorPrototype, TAG, true);
+      // fix for some old engines
+      if(!LIBRARY && !has(IteratorPrototype, ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
+    }
+  }
+  // fix Array#{values, @@iterator}.name in V8 / FF
+  if(DEF_VALUES && $native && $native.name !== VALUES){
+    VALUES_BUG = true;
+    $default = function values(){ return $native.call(this); };
+  }
+  // Define iterator
+  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
+    hide(proto, ITERATOR, $default);
+  }
+  // Plug for library
+  Iterators[NAME] = $default;
+  Iterators[TAG]  = returnThis;
+  if(DEFAULT){
+    methods = {
+      values:  DEF_VALUES ? $default : getMethod(VALUES),
+      keys:    IS_SET     ? $default : getMethod(KEYS),
+      entries: $entries
+    };
+    if(FORCED)for(key in methods){
+      if(!(key in proto))redefine(proto, key, methods[key]);
+    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+  }
+  return methods;
+};
+
+var $at  = _stringAt(true);
+
+// 21.1.3.27 String.prototype[@@iterator]()
+_iterDefine(String, 'String', function(iterated){
+  this._t = String(iterated); // target
+  this._i = 0;                // next index
+// 21.1.5.2.1 %StringIteratorPrototype%.next()
+}, function(){
+  var O     = this._t
+    , index = this._i
+    , point;
+  if(index >= O.length)return {value: undefined, done: true};
+  point = $at(O, index);
+  this._i += point.length;
+  return {value: point, done: false};
+});
+
+var _addToUnscopables = function(){ /* empty */ };
+
+var _iterStep = function(done, value){
+  return {value: value, done: !!done};
+};
+
+var addToUnscopables = _addToUnscopables;
+var step             = _iterStep;
+var Iterators$2        = _iterators;
+var toIObject$2        = _toIobject;
+
+// 22.1.3.4 Array.prototype.entries()
+// 22.1.3.13 Array.prototype.keys()
+// 22.1.3.29 Array.prototype.values()
+// 22.1.3.30 Array.prototype[@@iterator]()
+var es6_array_iterator = _iterDefine(Array, 'Array', function(iterated, kind){
+  this._t = toIObject$2(iterated); // target
+  this._i = 0;                   // next index
+  this._k = kind;                // kind
+// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+}, function(){
+  var O     = this._t
+    , kind  = this._k
+    , index = this._i++;
+  if(!O || index >= O.length){
+    this._t = undefined;
+    return step(1);
+  }
+  if(kind == 'keys'  )return step(0, index);
+  if(kind == 'values')return step(0, O[index]);
+  return step(0, [index, O[index]]);
+}, 'values');
+
+// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+Iterators$2.Arguments = Iterators$2.Array;
+
+addToUnscopables('keys');
+addToUnscopables('values');
+addToUnscopables('entries');
+
+var global$3        = _global;
+var hide$2          = _hide;
+var Iterators$1     = _iterators;
+var TO_STRING_TAG = _wks('toStringTag');
+
+for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
+  var NAME       = collections[i]
+    , Collection = global$3[NAME]
+    , proto      = Collection && Collection.prototype;
+  if(proto && !proto[TO_STRING_TAG])hide$2(proto, TO_STRING_TAG, NAME);
+  Iterators$1[NAME] = Iterators$1.Array;
+}
+
+var f$1 = _wks;
+
+var _wksExt = {
+	f: f$1
+};
+
+var iterator$2 = _wksExt.f('iterator');
+
+var iterator = createCommonjsModule(function (module) {
+module.exports = { "default": iterator$2, __esModule: true };
+});
+
+var _meta = createCommonjsModule(function (module) {
+var META     = _uid('meta')
+  , isObject = _isObject
+  , has      = _has
+  , setDesc  = _objectDp.f
+  , id       = 0;
+var isExtensible = Object.isExtensible || function(){
+  return true;
+};
+var FREEZE = !_fails(function(){
+  return isExtensible(Object.preventExtensions({}));
+});
+var setMeta = function(it){
+  setDesc(it, META, {value: {
+    i: 'O' + ++id, // object ID
+    w: {}          // weak collections IDs
+  }});
+};
+var fastKey = function(it, create){
+  // return primitive with prefix
+  if(!isObject(it))return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+  if(!has(it, META)){
+    // can't set metadata to uncaught frozen object
+    if(!isExtensible(it))return 'F';
+    // not necessary to add metadata
+    if(!create)return 'E';
+    // add missing metadata
+    setMeta(it);
+  // return object ID
+  } return it[META].i;
+};
+var getWeak = function(it, create){
+  if(!has(it, META)){
+    // can't set metadata to uncaught frozen object
+    if(!isExtensible(it))return true;
+    // not necessary to add metadata
+    if(!create)return false;
+    // add missing metadata
+    setMeta(it);
+  // return hash weak collections IDs
+  } return it[META].w;
+};
+// add metadata on freeze-family methods calling
+var onFreeze = function(it){
+  if(FREEZE && meta.NEED && isExtensible(it) && !has(it, META))setMeta(it);
+  return it;
+};
+var meta = module.exports = {
+  KEY:      META,
+  NEED:     false,
+  fastKey:  fastKey,
+  getWeak:  getWeak,
+  onFreeze: onFreeze
+};
+});
+
+var global$5         = _global;
+var core$1           = _core;
+var LIBRARY$1        = _library;
+var wksExt$1         = _wksExt;
+var defineProperty$1 = _objectDp.f;
+var _wksDefine = function(name){
+  var $Symbol = core$1.Symbol || (core$1.Symbol = LIBRARY$1 ? {} : global$5.Symbol || {});
+  if(name.charAt(0) != '_' && !(name in $Symbol))defineProperty$1($Symbol, name, {value: wksExt$1.f(name)});
+};
+
+var getKeys$1   = _objectKeys;
+var toIObject$4 = _toIobject;
+var _keyof = function(object, el){
+  var O      = toIObject$4(object)
+    , keys   = getKeys$1(O)
+    , length = keys.length
+    , index  = 0
+    , key;
+  while(length > index)if(O[key = keys[index++]] === el)return key;
+};
+
+var f$2 = Object.getOwnPropertySymbols;
+
+var _objectGops = {
+	f: f$2
+};
+
+var f$3 = {}.propertyIsEnumerable;
+
+var _objectPie = {
+	f: f$3
+};
+
+// all enumerable object keys, includes symbols
+var getKeys$2 = _objectKeys;
+var gOPS    = _objectGops;
+var pIE     = _objectPie;
+var _enumKeys = function(it){
+  var result     = getKeys$2(it)
+    , getSymbols = gOPS.f;
+  if(getSymbols){
+    var symbols = getSymbols(it)
+      , isEnum  = pIE.f
+      , i       = 0
+      , key;
+    while(symbols.length > i)if(isEnum.call(it, key = symbols[i++]))result.push(key);
+  } return result;
+};
+
+// 7.2.2 IsArray(argument)
+var cof$1 = _cof;
+var _isArray = Array.isArray || function isArray(arg){
+  return cof$1(arg) == 'Array';
+};
+
+// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+var $keys$2      = _objectKeysInternal;
+var hiddenKeys = _enumBugKeys.concat('length', 'prototype');
+
+var f$5 = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
+  return $keys$2(O, hiddenKeys);
+};
+
+var _objectGopn = {
+	f: f$5
+};
+
+// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
+var toIObject$5 = _toIobject;
+var gOPN$1      = _objectGopn.f;
+var toString$2  = {}.toString;
+
+var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
+  ? Object.getOwnPropertyNames(window) : [];
+
+var getWindowNames = function(it){
+  try {
+    return gOPN$1(it);
+  } catch(e){
+    return windowNames.slice();
+  }
+};
+
+var f$4 = function getOwnPropertyNames(it){
+  return windowNames && toString$2.call(it) == '[object Window]' ? getWindowNames(it) : gOPN$1(toIObject$5(it));
+};
+
+var _objectGopnExt = {
+	f: f$4
+};
+
+var pIE$1            = _objectPie;
+var createDesc$2     = _propertyDesc;
+var toIObject$6      = _toIobject;
+var toPrimitive$2    = _toPrimitive;
+var has$5            = _has;
+var IE8_DOM_DEFINE$1 = _ie8DomDefine;
+var gOPD$1           = Object.getOwnPropertyDescriptor;
+
+var f$6 = _descriptors ? gOPD$1 : function getOwnPropertyDescriptor(O, P){
+  O = toIObject$6(O);
+  P = toPrimitive$2(P, true);
+  if(IE8_DOM_DEFINE$1)try {
+    return gOPD$1(O, P);
+  } catch(e){ /* empty */ }
+  if(has$5(O, P))return createDesc$2(!pIE$1.f.call(O, P), O[P]);
+};
+
+var _objectGopd = {
+	f: f$6
+};
+
+// ECMAScript 6 symbols shim
+var global$4         = _global;
+var has$4            = _has;
+var DESCRIPTORS    = _descriptors;
+var $export$2        = _export;
+var redefine$1       = _redefine;
+var META           = _meta.KEY;
+var $fails         = _fails;
+var shared$1         = _shared;
+var setToStringTag$2 = _setToStringTag;
+var uid$1            = _uid;
+var wks            = _wks;
+var wksExt         = _wksExt;
+var wksDefine      = _wksDefine;
+var keyOf          = _keyof;
+var enumKeys       = _enumKeys;
+var isArray$1        = _isArray;
+var anObject$3       = _anObject;
+var toIObject$3      = _toIobject;
+var toPrimitive$1    = _toPrimitive;
+var createDesc$1     = _propertyDesc;
+var _create        = _objectCreate;
+var gOPNExt        = _objectGopnExt;
+var $GOPD          = _objectGopd;
+var $DP            = _objectDp;
+var $keys$1          = _objectKeys;
+var gOPD           = $GOPD.f;
+var dP$3             = $DP.f;
+var gOPN           = gOPNExt.f;
+var $Symbol        = global$4.Symbol;
+var $JSON          = global$4.JSON;
+var _stringify     = $JSON && $JSON.stringify;
+var PROTOTYPE$2      = 'prototype';
+var HIDDEN         = wks('_hidden');
+var TO_PRIMITIVE   = wks('toPrimitive');
+var isEnum         = {}.propertyIsEnumerable;
+var SymbolRegistry = shared$1('symbol-registry');
+var AllSymbols     = shared$1('symbols');
+var OPSymbols      = shared$1('op-symbols');
+var ObjectProto$1    = Object[PROTOTYPE$2];
+var USE_NATIVE     = typeof $Symbol == 'function';
+var QObject        = global$4.QObject;
+// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
+var setter = !QObject || !QObject[PROTOTYPE$2] || !QObject[PROTOTYPE$2].findChild;
+
+// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
+var setSymbolDesc = DESCRIPTORS && $fails(function(){
+  return _create(dP$3({}, 'a', {
+    get: function(){ return dP$3(this, 'a', {value: 7}).a; }
+  })).a != 7;
+}) ? function(it, key, D){
+  var protoDesc = gOPD(ObjectProto$1, key);
+  if(protoDesc)delete ObjectProto$1[key];
+  dP$3(it, key, D);
+  if(protoDesc && it !== ObjectProto$1)dP$3(ObjectProto$1, key, protoDesc);
+} : dP$3;
+
+var wrap = function(tag){
+  var sym = AllSymbols[tag] = _create($Symbol[PROTOTYPE$2]);
+  sym._k = tag;
+  return sym;
+};
+
+var isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function(it){
+  return typeof it == 'symbol';
+} : function(it){
+  return it instanceof $Symbol;
+};
+
+var $defineProperty = function defineProperty(it, key, D){
+  if(it === ObjectProto$1)$defineProperty(OPSymbols, key, D);
+  anObject$3(it);
+  key = toPrimitive$1(key, true);
+  anObject$3(D);
+  if(has$4(AllSymbols, key)){
+    if(!D.enumerable){
+      if(!has$4(it, HIDDEN))dP$3(it, HIDDEN, createDesc$1(1, {}));
+      it[HIDDEN][key] = true;
+    } else {
+      if(has$4(it, HIDDEN) && it[HIDDEN][key])it[HIDDEN][key] = false;
+      D = _create(D, {enumerable: createDesc$1(0, false)});
+    } return setSymbolDesc(it, key, D);
+  } return dP$3(it, key, D);
+};
+var $defineProperties = function defineProperties(it, P){
+  anObject$3(it);
+  var keys = enumKeys(P = toIObject$3(P))
+    , i    = 0
+    , l = keys.length
+    , key;
+  while(l > i)$defineProperty(it, key = keys[i++], P[key]);
+  return it;
+};
+var $create = function create(it, P){
+  return P === undefined ? _create(it) : $defineProperties(_create(it), P);
+};
+var $propertyIsEnumerable = function propertyIsEnumerable(key){
+  var E = isEnum.call(this, key = toPrimitive$1(key, true));
+  if(this === ObjectProto$1 && has$4(AllSymbols, key) && !has$4(OPSymbols, key))return false;
+  return E || !has$4(this, key) || !has$4(AllSymbols, key) || has$4(this, HIDDEN) && this[HIDDEN][key] ? E : true;
+};
+var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key){
+  it  = toIObject$3(it);
+  key = toPrimitive$1(key, true);
+  if(it === ObjectProto$1 && has$4(AllSymbols, key) && !has$4(OPSymbols, key))return;
+  var D = gOPD(it, key);
+  if(D && has$4(AllSymbols, key) && !(has$4(it, HIDDEN) && it[HIDDEN][key]))D.enumerable = true;
+  return D;
+};
+var $getOwnPropertyNames = function getOwnPropertyNames(it){
+  var names  = gOPN(toIObject$3(it))
+    , result = []
+    , i      = 0
+    , key;
+  while(names.length > i){
+    if(!has$4(AllSymbols, key = names[i++]) && key != HIDDEN && key != META)result.push(key);
+  } return result;
+};
+var $getOwnPropertySymbols = function getOwnPropertySymbols(it){
+  var IS_OP  = it === ObjectProto$1
+    , names  = gOPN(IS_OP ? OPSymbols : toIObject$3(it))
+    , result = []
+    , i      = 0
+    , key;
+  while(names.length > i){
+    if(has$4(AllSymbols, key = names[i++]) && (IS_OP ? has$4(ObjectProto$1, key) : true))result.push(AllSymbols[key]);
+  } return result;
+};
+
+// 19.4.1.1 Symbol([description])
+if(!USE_NATIVE){
+  $Symbol = function Symbol(){
+    if(this instanceof $Symbol)throw TypeError('Symbol is not a constructor!');
+    var tag = uid$1(arguments.length > 0 ? arguments[0] : undefined);
+    var $set = function(value){
+      if(this === ObjectProto$1)$set.call(OPSymbols, value);
+      if(has$4(this, HIDDEN) && has$4(this[HIDDEN], tag))this[HIDDEN][tag] = false;
+      setSymbolDesc(this, tag, createDesc$1(1, value));
+    };
+    if(DESCRIPTORS && setter)setSymbolDesc(ObjectProto$1, tag, {configurable: true, set: $set});
+    return wrap(tag);
+  };
+  redefine$1($Symbol[PROTOTYPE$2], 'toString', function toString(){
+    return this._k;
+  });
+
+  $GOPD.f = $getOwnPropertyDescriptor;
+  $DP.f   = $defineProperty;
+  _objectGopn.f = gOPNExt.f = $getOwnPropertyNames;
+  _objectPie.f  = $propertyIsEnumerable;
+  _objectGops.f = $getOwnPropertySymbols;
+
+  if(DESCRIPTORS && !_library){
+    redefine$1(ObjectProto$1, 'propertyIsEnumerable', $propertyIsEnumerable, true);
+  }
+
+  wksExt.f = function(name){
+    return wrap(wks(name));
+  };
+}
+
+$export$2($export$2.G + $export$2.W + $export$2.F * !USE_NATIVE, {Symbol: $Symbol});
+
+for(var symbols = (
+  // 19.4.2.2, 19.4.2.3, 19.4.2.4, 19.4.2.6, 19.4.2.8, 19.4.2.9, 19.4.2.10, 19.4.2.11, 19.4.2.12, 19.4.2.13, 19.4.2.14
+  'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'
+).split(','), i$1 = 0; symbols.length > i$1; )wks(symbols[i$1++]);
+
+for(var symbols = $keys$1(wks.store), i$1 = 0; symbols.length > i$1; )wksDefine(symbols[i$1++]);
+
+$export$2($export$2.S + $export$2.F * !USE_NATIVE, 'Symbol', {
+  // 19.4.2.1 Symbol.for(key)
+  'for': function(key){
+    return has$4(SymbolRegistry, key += '')
+      ? SymbolRegistry[key]
+      : SymbolRegistry[key] = $Symbol(key);
+  },
+  // 19.4.2.5 Symbol.keyFor(sym)
+  keyFor: function keyFor(key){
+    if(isSymbol(key))return keyOf(SymbolRegistry, key);
+    throw TypeError(key + ' is not a symbol!');
+  },
+  useSetter: function(){ setter = true; },
+  useSimple: function(){ setter = false; }
+});
+
+$export$2($export$2.S + $export$2.F * !USE_NATIVE, 'Object', {
+  // 19.1.2.2 Object.create(O [, Properties])
+  create: $create,
+  // 19.1.2.4 Object.defineProperty(O, P, Attributes)
+  defineProperty: $defineProperty,
+  // 19.1.2.3 Object.defineProperties(O, Properties)
+  defineProperties: $defineProperties,
+  // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
+  getOwnPropertyDescriptor: $getOwnPropertyDescriptor,
+  // 19.1.2.7 Object.getOwnPropertyNames(O)
+  getOwnPropertyNames: $getOwnPropertyNames,
+  // 19.1.2.8 Object.getOwnPropertySymbols(O)
+  getOwnPropertySymbols: $getOwnPropertySymbols
+});
+
+// 24.3.2 JSON.stringify(value [, replacer [, space]])
+$JSON && $export$2($export$2.S + $export$2.F * (!USE_NATIVE || $fails(function(){
+  var S = $Symbol();
+  // MS Edge converts symbol values to JSON as {}
+  // WebKit converts symbol values to JSON as null
+  // V8 throws on boxed symbols
+  return _stringify([S]) != '[null]' || _stringify({a: S}) != '{}' || _stringify(Object(S)) != '{}';
+})), 'JSON', {
+  stringify: function stringify(it){
+    if(it === undefined || isSymbol(it))return; // IE8 returns string on undefined
+    var args = [it]
+      , i    = 1
+      , replacer, $replacer;
+    while(arguments.length > i)args.push(arguments[i++]);
+    replacer = args[1];
+    if(typeof replacer == 'function')$replacer = replacer;
+    if($replacer || !isArray$1(replacer))replacer = function(key, value){
+      if($replacer)value = $replacer.call(this, key, value);
+      if(!isSymbol(value))return value;
+    };
+    args[1] = replacer;
+    return _stringify.apply($JSON, args);
+  }
+});
+
+// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
+$Symbol[PROTOTYPE$2][TO_PRIMITIVE] || _hide($Symbol[PROTOTYPE$2], TO_PRIMITIVE, $Symbol[PROTOTYPE$2].valueOf);
+// 19.4.3.5 Symbol.prototype[@@toStringTag]
+setToStringTag$2($Symbol, 'Symbol');
+// 20.2.1.9 Math[@@toStringTag]
+setToStringTag$2(Math, 'Math', true);
+// 24.3.3 JSON[@@toStringTag]
+setToStringTag$2(global$4.JSON, 'JSON', true);
+
+_wksDefine('asyncIterator');
+
+_wksDefine('observable');
+
+var index = _core.Symbol;
+
+var symbol = createCommonjsModule(function (module) {
+module.exports = { "default": index, __esModule: true };
+});
+
+var _typeof_1 = createCommonjsModule(function (module, exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var _iterator = iterator;
+
+var _iterator2 = _interopRequireDefault(_iterator);
+
+var _symbol = symbol;
+
+var _symbol2 = _interopRequireDefault(_symbol);
+
+var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function (obj) {
+  return typeof obj === "undefined" ? "undefined" : _typeof(obj);
+} : function (obj) {
+  return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+};
+});
+
+var _typeof = unwrapExports(_typeof_1);
+
+var list = (function (content) {
+
+    var ulStart = "<ul>";
+    var ulEnd = "</ul>";
+    var olStart = "<ol>";
+    var olEnd = "</ol>";
+
+    if (!config.useNestedList) {
+        var _ret = function () {
+            var isUnorderedList = /(([\*|\+|\-])(\u0020)+)(.*?)$/;
+            var isOrderedList = /((^[\d]\.)(\u0020)+)(.*?)$/;
+            var arr = content.split(/\n/);
+
+            var isFirstListItem = true;
+            var length = arr.length;
+
+
+            var newArr = arr.map(function (item, index, arr) {
+                if (isUnorderedList.test(item)) {
+                    item = item.replace(isUnorderedList, function ($0, $1, $2, $3, $4, index, str) {
+                        return "<li>" + $4 + "</li>";
+                    });
+                    if (isFirstListItem) {
+                        item = ulStart + item;
+                    }
+                    if (index === length - 1 || !isUnorderedList.test(arr[index + 1])) {
+                        item = item + ulEnd;
+                    }
+                    isFirstListItem = false;
+                } else {
+                    isFirstListItem = true;
+                }
+                return item;
+            });
+
+            isFirstListItem = false;
+            newArr = newArr.map(function (item, index, arr) {
+                if (isOrderedList.test(item)) {
+                    item = item.replace(isOrderedList, function ($0, $1, $2, $3, $4, index, str) {
+                        return "<li>" + $4 + "</li>";
+                    });
+                    if (!isFirstListItem) {
+                        item = olStart + item;
+                    }
+                    if (!arr[index + 1] || !isOrderedList.test(arr[index + 1])) {
+                        item = item + olEnd;
+                    }
+                    isFirstListItem = true;
+                } else {
+                    isFirstListItem = false;
+                }
+                return item;
+            });
+            content = newArr.join("\n");
+            return {
+                v: content
+            };
+        }();
+
+        if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+    } else {
+        var _arr = content.split(/\n/);
+        var _newArr = checkListItem(_arr, 0);
+        return content;
+    }
+});
+
+function checkListItem(arr, indent) {
+    var reg = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(?:(\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$", "mi");
+    var newArr = arr.map(function (item) {
+        return item;
+    });
+    return newArr;
+}
+
+var table = (function (content) {
+  var a = [1, 2, 3];
+  return content;
+});
+
+var code = (function (content) {
+    var regCodeBlock = /(^(\u0020)*`{3}(\w|\-|\.|\+|\-{1,10})?)((\n.*?)+)(`{3}$)/gm;
+    var isCode = /\<code\>(.*?)\<\/code\>/;
+    var hasLineBreak = /\r?\n/;
+    content = content.replace(regCodeBlock, function ($0, $1, $2, $3, $4, $5, $6, index, str) {
+        var text = $4;
+        var lang = $3 ? $3.toLowerCase() : "nohighlight";
+        text = "<pre><code class='" + lang + "'>" + text + "</code></pre>";
+        return text;
+    });
+
+    var arr = content.split(/\n/);
+    var newContent = arr.map(function (item, index) {
+        for (var i = 3; i >= 1; i--) {
+            var inlineCode = "(`{" + i + "})([^`]{1,}.*?[^`]*)(`{" + i + "})";
+            var regex = new RegExp(inlineCode, "g");
+            item = item.replace(regex, function ($0, $1, $2, $3, index, str) {
+                var text = $2;
+                if (!isCode.test(text) && $2.length > 0 && !hasLineBreak.test(text)) {
+                    text = "<code>" + text + "</code>";
+                    return text;
+                } else {
+                    return $0;
+                }
+            });
+        }
+        return item;
+    });
+    return newContent.join("\n");
+});
+
+var paragraph = (function (content) {
+    var arr = content.split(/\n/);
+    var isHTML = /^<[a-zA-Z0-9]{1,11}(\s.{1,18})?>.*<\/[a-zA-Z0-9]{1,11}>$/;
+    var isSpace = /^\u0020+|\r|\n$/;
+    var isCodeStart = /^(<pre>)?<code>$/;
+    var isCodeEnd = /^<\/code>(<pre>)?/;
+    var status = false;
+    var newContent = arr.map(function (item, index, arr) {
+        var str = "";
+
+        if (!isHTML.test(item) && !isSpace.test(item) && item !== "") {
+            str = "<p>" + item + "</p>";
+        } else {
+            str = item;
+        }
+        return str;
+    });
+    newContent = newContent.join("\n");
+    return newContent;
+});
+
+var blockquotes = (function (content) {
+    var regex = /(^((\u0020)*>+(\u0020)*)+)(.*)([^>]$)/gm;
+    content = content.replace(regex, function ($0, $1, $2, $3, $4, $5, index, str) {
+        var blockquoteStart = "<blockquotes>";
+        var blockquoteEnd = "</blockquotes>";
+        var count = 0;
+        var reg = />/g;
+        while (reg.test($1)) {
+            count++;
+        }
+        return "" + blockquoteStart.repeat(count) + $5 + blockquoteEnd.repeat(count);
+    });
+    return content;
+});
+
+function Ziz(content) {
+    content += "\r\n";
+
+    content = escapeSpecialChars(content);
+
+    content = header(content);
+    content = link(content);
+
+    content = table(content);
+    content = code(content);
+    content = list(content);
+    content = blockquotes(content);
+    content = del(content);
+    content = paragraph(content);
+    return content;
+}
+
+return Ziz;
+
+})));
 //# sourceMappingURL=Ziz.js.map
