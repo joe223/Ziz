@@ -5,5 +5,7 @@ export default {
     highlightCode: false,           // use highlight.js
     header: true,                   //
     table: true,
-    list: true
+    list: true,
+    space: false,
+    useNestedList: true,
 };

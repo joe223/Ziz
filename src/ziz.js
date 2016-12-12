@@ -1,5 +1,5 @@
 import config from "./ziz.config";
-import space from "./parser/space";
+// import space from "./parser/space";
 import escapeSpecialChars from "./parser/escapeSpecialChars";
 import del from "./parser/del";
 import header from "./parser/header";

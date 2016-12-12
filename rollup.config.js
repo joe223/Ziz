@@ -12,6 +12,7 @@ export default {
         uglify(),
         babel({
             exclude: 'node_modules/**',
+            runtimeHelpers: true
         }),
         npm({
             jsnext : true
