@@ -1,6 +1,6 @@
 {
   "name": "Ziz",
-  "version": "0.1.2",
+  "version": "0.2.2",
   "description": "a markdown parser",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,9 @@
     "url": "git+https://github.com/joe223/Ziz.git"
   },
   "keywords": [
-    "markdown"
+    "markdown",
+    "parser",
+    "javascript"
   ],
   "author": "joe223",
   "license": "MIT",
