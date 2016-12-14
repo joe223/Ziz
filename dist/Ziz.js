@@ -84,28 +84,56 @@ function checkListItem(arr, indent, nested) {
     var olStart = "<ol>";
     var olEnd = "</ol>";
 
-    var isItem = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/;
+    var isNestedList = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/;
     var reg = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(?:(\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$", "mi");
     var testIndentReg = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + (indent + 1) + "})(?:(\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$", "mi");
     var isUnorderedList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(([\\*|\\+|\\-])(\\u0020)+)(.*?)$", "i");
     var isOrderedList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})((^[\\d]\\.)(\\u0020)+)(.*?)$", "i");
 
     if (testIndentReg.test(arr.join("\n")) && nested) {
-        arr = checkListItem(arr, indent + 1);
+        arr = checkListItem(arr, indent + 1, true);
     }
+    console.warn("checkListItem:" + indent);
 
     var isFirstListItem = true;
     var isNestedListStart = true;
     var length = arr.length;
+
     var newArr = arr.map(function (item, index, arr) {
-        if (isUnorderedList.test(item)) {
+        var lastIsOListitem = false;
+        var lastIsUListitem = false;
+        var last = arr[index - 1];
+        var next = arr[index + 1];
+        if (last) {
+            if (isUnorderedList.test(last)) lastIsUListitem = true;
+            if (isOrderedList.test(last)) lastIsOListitem = true;
+        }
+        if (isNestedList.test(item)) {
+            if (isNestedListStart && (lastIsOListitem || lastIsUListitem)) {
+                item = "<li>" + item;
+                isNestedListStart = false;
+            }
+            if (next === undefined || !isNestedList.test(next)) {
+                item = item + "</li>";
+                isNestedListStart = true;
+            }
+            console.log("nest==========>,next:%s,isNestedList:%s", next, isNestedList.test(next));
+        }
+        return item;
+    });
+    console.log(newArr);
+
+    newArr = newArr.map(function (item, index, arr) {
+        var last = arr[index - 1];
+        var next = arr[index + 1];
+        if (isUnorderedList.test(item) || isNestedList.test(item)) {
             item = item.replace(isUnorderedList, function ($0, $1, $2, $3, $4, index, str) {
                 return "<li>" + $4 + "</li>";
             });
             if (isFirstListItem) {
                 item = ulStart + item;
             }
-            if (index === length - 1 || !isUnorderedList.test(arr[index + 1]) && !isItem.test(arr[index + 1])) {
+            if (index === length - 1 || !isUnorderedList.test(next) && !isNestedList.test(next)) {
                 item = item + ulEnd;
             }
             isFirstListItem = false;
@@ -116,8 +144,9 @@ function checkListItem(arr, indent, nested) {
     });
 
     isFirstListItem = false;
-    console.log(newArr);
     newArr = newArr.map(function (item, index, arr) {
+        var last = arr[index - 1];
+        var next = arr[index + 1];
         if (isOrderedList.test(item)) {
             item = item.replace(isOrderedList, function ($0, $1, $2, $3, $4, index, str) {
                 return "<li>" + $4 + "</li>";
@@ -125,17 +154,20 @@ function checkListItem(arr, indent, nested) {
             if (!isFirstListItem) {
                 item = olStart + item;
             }
-            if (!arr[index + 1] || !isOrderedList.test(arr[index + 1]) && !isItem.test(arr[index + 1])) {
+            if (!arr[index + 1] || !isOrderedList.test(next) && !isNestedList.test(next)) {
                 item = item + olEnd;
             }
-            isFirstListItem = true;
-        } else {
             isFirstListItem = false;
+        } else {
+            if (isNestedList.test(item)) {}
+            isFirstListItem = true;
         }
+
         return item;
     });
 
-    newArr = newArr.map(function (item, index, arr) {});
+    console.log(newArr);
+
     return newArr;
 }
 

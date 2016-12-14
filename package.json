@@ -2,7 +2,7 @@
   "name": "Ziz",
   "version": "0.2.2",
   "description": "a markdown parser",
-  "main": "index.js",
+  "main": "dist/Ziz.js",
   "scripts": {
     "dev": "rollup -c -w",
     "watch": "watch 'rollup -c' --wait=2 ./src",

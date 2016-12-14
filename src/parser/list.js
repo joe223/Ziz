@@ -28,7 +28,7 @@ function checkListItem ( arr, indent, nested ) {
     const olStart = "<ol>";
     const olEnd = "</ol>";
 
-    const isItem = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/;
+    const isNestedList = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/;
     const reg = new RegExp( `(?:^(?:\\t|(?:\\u0020){4}){${ indent }})(?:(\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$`, "mi" );
     const testIndentReg = new RegExp( `(?:^(?:\\t|(?:\\u0020){4}){${ indent + 1 }})(?:(\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$`, "mi" );
     const isUnorderedList = new RegExp( `(?:^(?:\\t|(?:\\u0020){4}){${ indent }})(([\\*|\\+|\\-])(\\u0020)+)(.*?)$`, "i" );
@@ -36,22 +36,53 @@ function checkListItem ( arr, indent, nested ) {
 
     // if there is an another list
     if ( testIndentReg.test( arr.join( "\n" ) ) && nested ) {
-        arr = checkListItem( arr, indent + 1 );
+        arr = checkListItem( arr, indent + 1, true );
     }
-
+    console.warn( "checkListItem:" + indent );
     // unordered list
     let isFirstListItem = true;
     let isNestedListStart = true;
     let length = arr.length;
+
+
+
+    // nested list
     let newArr = arr.map( ( item, index, arr ) => {
-        if ( isUnorderedList.test( item ) ) {
+        let lastIsOListitem = false;
+        let lastIsUListitem = false;
+        let last = arr[index - 1];
+        let next = arr[index + 1];
+        if ( last ) {
+            if ( isUnorderedList.test( last ) ) lastIsUListitem = true;
+            if ( isOrderedList.test( last ) ) lastIsOListitem = true;
+        }
+        if ( isNestedList.test( item ) ) {
+            if ( isNestedListStart && ( lastIsOListitem || lastIsUListitem ) ) {
+                item = "<li>" + item;
+                isNestedListStart = false;
+            }
+            if ( next === undefined || !isNestedList.test( next ) ) {
+                item = item + "</li>";
+                isNestedListStart = true;
+            }
+            console.log( "nest==========>,next:%s,isNestedList:%s",next,isNestedList.test( next ) );
+
+        }
+        return item;
+    });
+    console.log( newArr )
+
+    newArr = newArr.map( ( item, index, arr ) => {
+        let last = arr[index - 1];
+        let next = arr[index + 1];
+        if ( isUnorderedList.test( item ) || isNestedList.test( item ) ) {
             item = item.replace( isUnorderedList, ( $0, $1, $2, $3, $4, index, str ) => {
                 return "<li>" + $4 + "</li>";
             });
             if ( isFirstListItem ) {
                 item = ulStart + item;
             }
-            if ( index === ( length - 1 ) || ( !isUnorderedList.test( arr[index + 1] ) && !isItem.test( arr[index + 1]) ) ) {
+            if ( index === ( length - 1 ) || ( !isUnorderedList.test( next ) && !isNestedList.test( next ) ) ) {
                 item = item + ulEnd;
             }
             isFirstListItem = false;
@@ -63,8 +94,9 @@ function checkListItem ( arr, indent, nested ) {
 
     // ordered list
     isFirstListItem = false;
-    console.log( newArr )
     newArr = newArr.map( ( item, index, arr ) => {
+        let last = arr[index - 1];
+        let next = arr[index + 1];
         if ( isOrderedList.test( item ) ) {
             item = item.replace( isOrderedList, ( $0, $1, $2, $3, $4, index, str ) => {
                 return "<li>" + $4 + "</li>";
@@ -72,20 +104,22 @@ function checkListItem ( arr, indent, nested ) {
             if ( !isFirstListItem ) {
                 item = olStart + item;
             }
-            if ( !arr[index + 1] || ( !isOrderedList.test( arr[index + 1] ) && !isItem.test( arr[index + 1]) ) ) {
+            if ( !arr[index + 1] || ( !isOrderedList.test( next ) && !isNestedList.test( next ) ) ) {
                 item = item + olEnd;
             }
-            isFirstListItem = true;
-        } else {
             isFirstListItem = false;
+        } else {
+            if ( isNestedList.test( item ) ) {
+
+            }
+            isFirstListItem = true;
         }
+
         return item;
     });
-    // content = newArr.join("\n");
-    // return content;
-    newArr = newArr.map( ( item, index, arr ) => {
-        
-    });
+
+    console.log( newArr )
+
     return newArr;
 }
 

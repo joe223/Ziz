@@ -4,6 +4,7 @@
 .git
 .hg
 .npmrc
+.idea
 .lock-wscript
 .svn
 .wafpickle-*
