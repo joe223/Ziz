@@ -134,7 +134,7 @@ function checkListItem(arr, indent, nesting) {
             status.itemStr += li;
             console.log(li);
 
-            if (status.type.test(nextItem)) {} else {
+            if (status.type.test(nextItem) || isNestingList.test(nextItem)) {} else {
                 status.itemStr = status.itemStr + status.endTag;
             }
 
@@ -146,7 +146,7 @@ function checkListItem(arr, indent, nesting) {
                 status.itemStr += "</li>";
             }
 
-            if (status.type.test(nextItem)) {} else {
+            if (status.type.test(nextItem) || isNestingList.test(nextItem)) {} else {
                 status.itemStr = status.itemStr + status.endTag;
                 status.unClosedListItem = false;
             }

@@ -96,7 +96,7 @@ function checkListItem ( arr, indent, nesting ) {
             console.log( li );
 
             // whether we should append the list close tag </ol> / </ul>
-            if ( status.type.test( nextItem ) ) {
+            if ( status.type.test( nextItem ) || isNestingList.test( nextItem ) ) {
                 // TODO:
             } else {
                 // console.log( status.itemStr );
@@ -120,7 +120,7 @@ function checkListItem ( arr, indent, nesting ) {
                 status.itemStr += "</li>"
             }
             // whether we should append the list close tag </ol> / </ul>
-            if ( status.type.test( nextItem ) ) {
+            if ( status.type.test( nextItem ) || isNestingList.test( nextItem ) ) {
                 // TODO:
             } else {
                 status.itemStr = status.itemStr + status.endTag;
@@ -247,4 +247,4 @@ function checkListItem ( arr, indent, nesting ) {
 //
 //
 // (^(\t|(\u0020){4})*)((?:[\*\+\-])(?:\u0020)+)(.*?)$ // 匹配无序列表，
-// 
+//
