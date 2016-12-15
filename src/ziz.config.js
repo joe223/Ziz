@@ -7,5 +7,5 @@ export default {
     table: true,
     list: true,
     space: false,
-    useNestedList: true,
+    useNestingList: true,
 };
