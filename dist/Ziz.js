@@ -75,6 +75,7 @@ var list = (function (content) {
     } else {
         newArr = checkListItem(arr, 0, true);
     }
+    console.log(newArr);
     return newArr.join("\n");
 });
 
@@ -88,7 +89,8 @@ function checkListItem(arr, indent, nesting) {
     var isListItem = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(?:(?:\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$", "mi");
     var hasNestingList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + (indent + 1) + "})(?:(\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$", "mi");
     var isUnorderedList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(([\\*|\\+|\\-])(\\u0020)+)(.*?)$", "i");
-    var isOrderedList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})((^[\\d]\\.)(\\u0020)+)(.*?)$", "i");
+
+    var isOrderedList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(([\\d]\\.)(\\u0020)+)(.*?)$", "i");
 
     if (hasNestingList.test(arr.join("\n")) && nesting) {
         arr = checkListItem(arr, indent + 1, nesting);
@@ -103,17 +105,20 @@ function checkListItem(arr, indent, nesting) {
         startTag: "",
         endTag: ""
     };
-    console.log(arr);
 
     arr.map(function (item, index, arr) {
         var lastItem = arr[index - 1];
         var nextItem = arr[index + 1];
+
+
         if (isListItem.test(item)) {
             var li = item.replace(isListItem, function ($0, $1, index, str) {
                 return "<li>" + $1;
             });
 
             if (status.isFirstListItem) {
+                console.log("===================");
+                console.log(item);
                 if (isOrderedList.test(item)) {
                     status.type = isOrderedList;
                     status.startTag = olStart;
@@ -123,7 +128,13 @@ function checkListItem(arr, indent, nesting) {
                     status.startTag = ulStart;
                     status.endTag = ulEnd;
                 }
+                console.log(isOrderedList);
+                console.log(isUnorderedList);
+
                 li = status.startTag + li;
+                status.isFirstListItem = false;
+                console.log(isOrderedList.test(item));
+                console.log("===================");
             }
 
             if (isNestingList.test(nextItem)) {
@@ -132,13 +143,11 @@ function checkListItem(arr, indent, nesting) {
                 li += "</li>";
             }
             status.itemStr += li;
-            console.log(li);
 
             if (status.type.test(nextItem) || isNestingList.test(nextItem)) {} else {
                 status.itemStr = status.itemStr + status.endTag;
+                status.isFirstListItem = true;
             }
-
-            status.isFirstListItem = false;
         } else if (isNestingList.test(item) && status.unClosedListItem) {
             status.itemStr += item;
 
@@ -148,9 +157,9 @@ function checkListItem(arr, indent, nesting) {
 
             if (status.type.test(nextItem) || isNestingList.test(nextItem)) {} else {
                 status.itemStr = status.itemStr + status.endTag;
+                status.isFirstListItem = true;
                 status.unClosedListItem = false;
             }
-            status.isFirstListItem = false;
         } else {
             if (status.itemStr) {
                 newArr.push(status.itemStr);

@@ -13,12 +13,9 @@ export default ( content ) => {
     } else {
         newArr = checkListItem( arr, 0, true );
     }
+    console.log( newArr );
     return newArr.join( "\n" );
 };
-
-
-
-
 
 function checkListItem ( arr, indent, nesting ) {
     // test "1. adfsdf".match(reg)
@@ -32,7 +29,8 @@ function checkListItem ( arr, indent, nesting ) {
     const isListItem = new RegExp( `(?:^(?:\\t|(?:\\u0020){4}){${ indent }})(?:(?:\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$`, "mi" );
     const hasNestingList = new RegExp( `(?:^(?:\\t|(?:\\u0020){4}){${ indent + 1 }})(?:(\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$`, "mi" );
     const isUnorderedList = new RegExp( `(?:^(?:\\t|(?:\\u0020){4}){${ indent }})(([\\*|\\+|\\-])(\\u0020)+)(.*?)$`, "i" );
-    const isOrderedList = new RegExp( `(?:^(?:\\t|(?:\\u0020){4}){${ indent }})((^[\\d]\\.)(\\u0020)+)(.*?)$`, "i" );
+    // const isOrderedList = new RegExp( `(?:^(?:\\t|(?:\\u0020){4}){${ indent }})((^[\\d]\\.)(\\u0020)+)(.*?)$`, "i" );
+    const isOrderedList = new RegExp( `(?:^(?:\\t|(?:\\u0020){4}){${ indent }})(([\\d]\\.)(\\u0020)+)(.*?)$`, "i" );
 
     // if there is an another list
     if ( hasNestingList.test( arr.join( "\n" ) ) && nesting ) {
@@ -55,7 +53,7 @@ function checkListItem ( arr, indent, nesting ) {
         startTag: "",
         endTag: ""
     }
-    console.log( arr );
+    // console.log( arr );
     // let isFirstListItem = true;
     // let type = undefined;
     // let itemStr = "";
@@ -63,6 +61,8 @@ function checkListItem ( arr, indent, nesting ) {
     arr.map( ( item, index, arr ) => {
         let lastItem = arr[index - 1];
         let nextItem = arr[index + 1];
+        // status.isFirstListItem = false;
+
         if ( isListItem.test( item ) ) {
 
             // if this is a list item,
@@ -73,7 +73,10 @@ function checkListItem ( arr, indent, nesting ) {
 
             // if this is the first item of new list,
             // add list start tag
+            // console.log( newArr );
             if ( status.isFirstListItem ) {
+                console.log( "===================" )
+                console.log( item )
                 if ( isOrderedList.test( item ) ) {
                     status.type = isOrderedList;
                     status.startTag = olStart;
@@ -83,7 +86,13 @@ function checkListItem ( arr, indent, nesting ) {
                     status.startTag = ulStart;
                     status.endTag = ulEnd;
                 }
+                console.log(isOrderedList);
+                console.log(isUnorderedList);
+
                 li = status.startTag + li;
+                status.isFirstListItem = false;
+                console.log( isOrderedList.test( item ) );
+                console.log( "===================" )
             }
 
             // append the close </li> tag
@@ -93,7 +102,7 @@ function checkListItem ( arr, indent, nesting ) {
                 li += "</li>";
             }
             status.itemStr += li;
-            console.log( li );
+            // console.log( li );
 
             // whether we should append the list close tag </ol> / </ul>
             if ( status.type.test( nextItem ) || isNestingList.test( nextItem ) ) {
@@ -101,12 +110,14 @@ function checkListItem ( arr, indent, nesting ) {
             } else {
                 // console.log( status.itemStr );
                 status.itemStr = status.itemStr + status.endTag;
+                status.isFirstListItem = true;
+
                 // console.log( status.itemStr );
 
                 // status.unClosedListItem = false;    // the list is closed
             }
             // status.itemStr += li;
-            status.isFirstListItem = false;
+            // status.isFirstListItem = false;
 
         // if this is nesting list && the last item is unclosed
         } else if ( isNestingList.test( item ) && status.unClosedListItem ) {
@@ -124,9 +135,10 @@ function checkListItem ( arr, indent, nesting ) {
                 // TODO:
             } else {
                 status.itemStr = status.itemStr + status.endTag;
+                status.isFirstListItem = true;
                 status.unClosedListItem = false;    // the list is closed
             }
-            status.isFirstListItem = false;
+            // status.isFirstListItem = false;
 
         // reset status object && push itemStr
         } else {
@@ -145,106 +157,5 @@ function checkListItem ( arr, indent, nesting ) {
         }
     });
 
-
-    // // nesting list
-    // let newArr = arr.map( ( item, index, arr ) => {
-    //     let lastIsOListitem = false;
-    //     let lastIsUListitem = false;
-    //     let last = arr[index - 1];
-    //     let next = arr[index + 1];
-    //     if ( last ) {
-    //         if ( isUnorderedList.test( last ) ) lastIsUListitem = true;
-    //         if ( isOrderedList.test( last ) ) lastIsOListitem = true;
-    //     }
-    //     if ( isnestingList.test( item ) ) {
-    //         if ( isnestingListStart && ( lastIsOListitem || lastIsUListitem ) ) {
-    //             item = "<li>" + item;
-    //             isnestingListStart = false;
-    //         }
-    //         if ( next === undefined || !isnestingList.test( next ) ) {
-    //             item = item + "</li>";
-    //             isnestingListStart = true;
-    //         }
-    //         console.log( "nest==========>,next:%s,isnestingList:%s",next,isnestingList.test( next ) );
-    //
-    //     }
-    //     return item;
-    // });
-    // console.log( newArr )
-    //
-    //
-    //
-    //
-    //
-    // newArr = newArr.map( ( item, index, arr ) => {
-    //     let last = arr[index - 1];
-    //     let next = arr[index + 1];
-    //     if ( isUnorderedList.test( item ) || isnestingList.test( item ) ) {
-    //         item = item.replace( isUnorderedList, ( $0, $1, $2, $3, $4, index, str ) => {
-    //             return "<li>" + $4 + "</li>";
-    //         });
-    //         if ( isFirstListItem ) {
-    //             item = ulStart + item;
-    //         }
-    //         if ( index === ( length - 1 ) || ( !isUnorderedList.test( next ) && !isnestingList.test( next ) ) ) {
-    //             item = item + ulEnd;
-    //         }
-    //         isFirstListItem = false;
-    //     } else {
-    //         isFirstListItem = true;
-    //     }
-    //     return item;
-    // });
-    //
-    // // ordered list
-    // isFirstListItem = false;
-    // newArr = newArr.map( ( item, index, arr ) => {
-    //     let last = arr[index - 1];
-    //     let next = arr[index + 1];
-    //     if ( isOrderedList.test( item ) ) {
-    //         item = item.replace( isOrderedList, ( $0, $1, $2, $3, $4, index, str ) => {
-    //             return "<li>" + $4 + "</li>";
-    //         });
-    //         if ( !isFirstListItem ) {
-    //             item = olStart + item;
-    //         }
-    //         if ( !arr[index + 1] || ( !isOrderedList.test( next ) && !isnestingList.test( next ) ) ) {
-    //             item = item + olEnd;
-    //         }
-    //         isFirstListItem = false;
-    //     } else {
-    //         if ( isnestingList.test( item ) ) {
-    //
-    //         }
-    //         isFirstListItem = true;
-    //     }
-    //
-    //     return item;
-    // });
-    //
-    // console.log( newArr )
-
     return newArr;
 }
-
-
-// isUnorderedList = (^(\t|(\u0020){4})*)((?:[\*|\+|\-])(?:\u0020)+)(.*?)$
-//
-//
-//
-// * asdfasdfasdfa是
-// + asdfasdfasdfa2
-// - asdfasdfasdfa1
-//
-// 1. 23123
-// 2. 23123
-//     * asdfasdfasdfa是
-//     + asdfasdfasdfa2
-// 		1. 23123
-// 		3. 23123
-//     - asdfasdfasdfa1
-// 3. 23123
-//
-//
-// (^(\t|(\u0020){4})*)((?:[\*\+\-])(?:\u0020)+)(.*?)$ // 匹配无序列表，
-//
