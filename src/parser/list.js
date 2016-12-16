@@ -13,7 +13,6 @@ export default ( content ) => {
     } else {
         newArr = checkListItem( arr, 0, true );
     }
-    console.log( newArr );
     return newArr.join( "\n" );
 };
 
@@ -75,8 +74,6 @@ function checkListItem ( arr, indent, nesting ) {
             // add list start tag
             // console.log( newArr );
             if ( status.isFirstListItem ) {
-                console.log( "===================" )
-                console.log( item )
                 if ( isOrderedList.test( item ) ) {
                     status.type = isOrderedList;
                     status.startTag = olStart;
@@ -86,13 +83,9 @@ function checkListItem ( arr, indent, nesting ) {
                     status.startTag = ulStart;
                     status.endTag = ulEnd;
                 }
-                console.log(isOrderedList);
-                console.log(isUnorderedList);
 
                 li = status.startTag + li;
                 status.isFirstListItem = false;
-                console.log( isOrderedList.test( item ) );
-                console.log( "===================" )
             }
 
             // append the close </li> tag

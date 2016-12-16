@@ -4,16 +4,25 @@
  * @return {[type]}         [description]s
  */
 export default ( content ) => {
-    let regex = /(^((\u0020)*>+(\u0020)*)+)(.*)([^>]$)/gm;         // (^>+(\u0020)*)+(.*)([^>]$)
-    content = content.replace( regex, ( $0, $1, $2, $3, $4, $5, index, str ) => {
-        let blockquoteStart = "<blockquotes>";
-        let blockquoteEnd = "</blockquotes>";
+    const regex = /(^((?:\u0020)*(?:&gt;))+(?:\u0020)*)+(.*?)$/gm;         // (^>+(\u0020)*)+(.*)([^>]$)
+    // const regex = /(^((\u0020)*>+(\u0020)*)+)(.*)([^>]$)/gm;         // (^>+(\u0020)*)+(.*)([^>]$)
+    const blockquoteStart = "<blockquote>";
+    const blockquoteEnd = "</blockquote>";
+    content = content.replace( regex, ( $0, $1, $2, $3, index, str ) => {
+
         let count = 0;
-        let reg = />/g;
+        let reg = /&gt;/g;
+        // console.log( $1 );
+        // console.log( $2 );
         while ( reg.test( $1 ) ) {
             count++;
+            console.log( "blockquotes" );
         }
-        return `${blockquoteStart.repeat( count )}${$5}${blockquoteEnd.repeat( count )}`;
+        // console.log( $3 );
+        // console.log( `${blockquoteStart.repeat( count )}${$3}${blockquoteEnd.repeat( count )}` );
+        return `${blockquoteStart.repeat( count )}${$3}${blockquoteEnd.repeat( count )}`;
     });
+    console.log( content );
+
     return content;
 };

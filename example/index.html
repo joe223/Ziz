@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackedit.io/res-min/themes/default.css">
     <title>Ziz test</title>
     <style>
         * {
@@ -21,11 +22,28 @@
         ul,ol {
             margin-left: 1rem;
         }
+        pre {
+            text-align: start;
+            border: 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background: #eee;
+        }
+        blockquote {
+            display: block;
+            padding: 15px 20px;
+            margin: 21px 0;
+            border-left-width: 10px;
+            border-left-color: #eee;
+            background-color: rgba(128,128,128,0.05);
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
         .container {
             margin: 2.5rem auto 2.5rem auto;
             padding: 1rem;
-            width: 48rem;
-            height: 50%;
+            width: 56rem;
+            height: 80%;
             box-shadow: rgba(0,0,0,0.15) 0 0 4px 2px;
             background-color: #fff;
         }
@@ -39,6 +57,7 @@
             display: inline-block;
             flex: 1;
             height: 100%;
+            overflow: scroll;
         }
         .md textarea {
             display: block;
@@ -69,6 +88,30 @@
     + nesting list item22222222211111111
     2. list item2222222222222222222
 
+`javascript`
+
+>  北冥有鱼，其名为鲲
+
+~~delete~~
+
+```
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
+
+And flow charts like this:
+
+```
+st=>start: Start
+e=>end
+op=>operation: My Operation
+cond=>condition: Yes or No?
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
                 </textarea>
             </div>
             <div id="result"></div>

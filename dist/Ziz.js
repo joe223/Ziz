@@ -25,9 +25,9 @@ var escapeSpecialChars = (function (content) {
 });
 
 var del = (function (content) {
-    var reg = /~~(?!~)(.*)?~~/m;
-    content = content.replace(reg, function ($0, $1, $2) {
-        return "<del>" + $2 + "</del>";
+    var reg = /~~(?!~)(.*?)~~/m;
+    content = content.replace(reg, function ($0, $1, index, str) {
+        return "<del>" + $1 + "</del>";
     });
     return content;
 });
@@ -75,7 +75,6 @@ var list = (function (content) {
     } else {
         newArr = checkListItem(arr, 0, true);
     }
-    console.log(newArr);
     return newArr.join("\n");
 });
 
@@ -117,8 +116,6 @@ function checkListItem(arr, indent, nesting) {
             });
 
             if (status.isFirstListItem) {
-                console.log("===================");
-                console.log(item);
                 if (isOrderedList.test(item)) {
                     status.type = isOrderedList;
                     status.startTag = olStart;
@@ -128,13 +125,9 @@ function checkListItem(arr, indent, nesting) {
                     status.startTag = ulStart;
                     status.endTag = ulEnd;
                 }
-                console.log(isOrderedList);
-                console.log(isUnorderedList);
 
                 li = status.startTag + li;
                 status.isFirstListItem = false;
-                console.log(isOrderedList.test(item));
-                console.log("===================");
             }
 
             if (isNestingList.test(nextItem)) {
@@ -184,12 +177,13 @@ var table = (function (content) {
 });
 
 var code = (function (content) {
-    var regCodeBlock = /(^(\u0020)*`{3}(\w|\-|\.|\+|\-{1,10})?)((\n.*?)+)(`{3}$)/gm;
+    var regCodeBlock = /(^(?:\u0020)*`{3}((\w|\-|\.|\+|-|#){1,10})?)((\n.*?)+)(?:`{3}$)/gm;
+
     var isCode = /\<code\>(.*?)\<\/code\>/;
     var hasLineBreak = /\r?\n/;
-    content = content.replace(regCodeBlock, function ($0, $1, $2, $3, $4, $5, $6, index, str) {
+    content = content.replace(regCodeBlock, function ($0, $1, $2, $3, $4, $5, index, str) {
         var text = $4;
-        var lang = $3 ? $3.toLowerCase() : "nohighlight";
+        var lang = $2 ? $3.toLowerCase() : "nohighlight";
         text = "<pre><code class='" + lang + "'>" + text + "</code></pre>";
         return text;
     });
@@ -236,17 +230,23 @@ var paragraph = (function (content) {
 });
 
 var blockquotes = (function (content) {
-    var regex = /(^((\u0020)*>+(\u0020)*)+)(.*)([^>]$)/gm;
-    content = content.replace(regex, function ($0, $1, $2, $3, $4, $5, index, str) {
-        var blockquoteStart = "<blockquotes>";
-        var blockquoteEnd = "</blockquotes>";
+    var regex = /(^((?:\u0020)*(?:&gt;))+(?:\u0020)*)+(.*?)$/gm;
+    var blockquoteStart = "<blockquote>";
+    var blockquoteEnd = "</blockquote>";
+    content = content.replace(regex, function ($0, $1, $2, $3, index, str) {
+
         var count = 0;
-        var reg = />/g;
+        var reg = /&gt;/g;
+
         while (reg.test($1)) {
             count++;
+            console.log("blockquotes");
         }
-        return "" + blockquoteStart.repeat(count) + $5 + blockquoteEnd.repeat(count);
+
+        return "" + blockquoteStart.repeat(count) + $3 + blockquoteEnd.repeat(count);
     });
+    console.log(content);
+
     return content;
 });
 

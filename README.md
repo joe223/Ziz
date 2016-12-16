@@ -3,10 +3,12 @@
 
 ## install
 
-    npm install Ziz
+```
+npm install Ziz
+```
 
 ## usage
 ``` javascript
-    import Ziz from "Ziz"; // es6
-    Ziz("# Ziz");
+import Ziz from "Ziz"; // or require("Ziz")
+Ziz("# Ziz");
 ```
