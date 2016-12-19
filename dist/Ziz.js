@@ -32,6 +32,22 @@ var del = (function (content) {
     return content;
 });
 
+var italic = (function (content) {
+    var reg = /\*(?!\*)(.*?)\*/m;
+    content = content.replace(reg, function ($0, $1, index, str) {
+        return "<em>" + $1 + "</em>";
+    });
+    return content;
+});
+
+var bold = (function (content) {
+    var reg = /\*\*(?!\*)(.*?)\*\*/m;
+    content = content.replace(reg, function ($0, $1, index, str) {
+        return "<strong>" + $1 + "</strong>";
+    });
+    return content;
+});
+
 var header = (function (content) {
     var setextHeader1 = /^(.*)\r?\n(={5,})$/gm;
     var setextHeader2 = /^(.*)\r?\n(-{5,})$/gm;
@@ -84,12 +100,11 @@ function checkListItem(arr, indent, nesting) {
     var olStart = "<ol>";
     var olEnd = "</ol>";
 
-    var isNestingList = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/;
     var isListItem = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(?:(?:\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$", "mi");
     var hasNestingList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + (indent + 1) + "})(?:(\\*|\\+|\\-|\\d\\.)(?:\\u0020)+)(.*?)$", "mi");
-    var isUnorderedList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(([\\*|\\+|\\-])(\\u0020)+)(.*?)$", "i");
+    var isUnorderedList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(([\\*|\\+|\\-])(\\u0020)+)(.*?)$", "mi");
 
-    var isOrderedList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(([\\d]\\.)(\\u0020)+)(.*?)$", "i");
+    var isOrderedList = new RegExp("(?:^(?:\\t|(?:\\u0020){4}){" + indent + "})(([\\d]\\.)(\\u0020)+)(.*?)$", "mi");
 
     if (hasNestingList.test(arr.join("\n")) && nesting) {
         arr = checkListItem(arr, indent + 1, nesting);
@@ -99,12 +114,12 @@ function checkListItem(arr, indent, nesting) {
     var status = {
         isFirstListItem: true,
         type: undefined,
-        itemStr: "",
+        itemStr: [],
         unClosedListItem: false,
         startTag: "",
         endTag: ""
     };
-
+    console.log(arr);
     arr.map(function (item, index, arr) {
         var lastItem = arr[index - 1];
         var nextItem = arr[index + 1];
@@ -130,45 +145,50 @@ function checkListItem(arr, indent, nesting) {
                 status.isFirstListItem = false;
             }
 
-            if (isNestingList.test(nextItem)) {
+            if (isNestingList(nextItem)) {
                 status.unClosedListItem = true;
             } else {
                 li += "</li>";
             }
-            status.itemStr += li;
 
-            if (status.type.test(nextItem) || isNestingList.test(nextItem)) {} else {
-                status.itemStr = status.itemStr + status.endTag;
+            status.itemStr.push(li);
+
+            if (status.type.test(nextItem) || isNestingList(nextItem)) {} else {
+                status.itemStr.push(status.endTag);
                 status.isFirstListItem = true;
             }
-        } else if (isNestingList.test(item) && status.unClosedListItem) {
-            status.itemStr += item;
+        } else if (isNestingList(item) && status.unClosedListItem) {
+            status.itemStr.push(item);
 
-            if (isNestingList.test(nextItem)) {} else {
-                status.itemStr += "</li>";
+            if (isNestingList(nextItem)) {} else {
+                status.itemStr.push("</li>");
             }
 
-            if (status.type.test(nextItem) || isNestingList.test(nextItem)) {} else {
-                status.itemStr = status.itemStr + status.endTag;
+            if (status.type.test(nextItem) || isNestingList(nextItem)) {} else {
+                status.itemStr.push(status.endTag);
                 status.isFirstListItem = true;
                 status.unClosedListItem = false;
             }
         } else {
-            if (status.itemStr) {
-                newArr.push(status.itemStr);
+            if (status.itemStr.length) {
+                newArr.push(status.itemStr.join(""));
             }
 
             status.isFirstListItem = true;
             status.type = undefined;
-            status.itemStr = "";
+            status.itemStr = [];
             status.unClosedListItem = false;
             status.startTag = "";
             status.endTag = "";
             newArr.push(item);
         }
     });
-
     return newArr;
+}
+
+function isNestingList(str) {
+    var isNestingList = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/mi;
+    return isNestingList.test(str);
 }
 
 var table = (function (content) {
@@ -254,15 +274,17 @@ function Ziz(content) {
     content += "\r\n";
 
     content = escapeSpecialChars(content);
+    content = del(content);
+    content = bold(content);
+    content = italic(content);
+    content = code(content);
 
     content = header(content);
     content = link(content);
 
     content = table(content);
-    content = code(content);
     content = list(content);
     content = blockquotes(content);
-    content = del(content);
     content = paragraph(content);
     return content;
 }
