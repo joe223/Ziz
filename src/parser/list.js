@@ -36,7 +36,7 @@ function checkListItem ( arr, indent, nesting ) {
     }
 
     // unordered list
-    // let isnestingListStart = true;
+    // let isItemContentStart = true;
     // let length = arr.length;
 
 
@@ -84,7 +84,7 @@ function checkListItem ( arr, indent, nesting ) {
             }
 
             // append the close </li> tag
-            if ( isNestingList( nextItem ) ) {
+            if ( isItemContent( nextItem ) ) {
                 status.unClosedListItem = true;
             } else {
                 li += "</li>";
@@ -94,7 +94,7 @@ function checkListItem ( arr, indent, nesting ) {
             // console.log( li );
 
             // whether we should append the list close tag </ol> / </ul>
-            if ( status.type.test( nextItem ) || isNestingList( nextItem ) ) {
+            if ( status.type.test( nextItem ) || isItemContent( nextItem ) ) {
                 // TODO:
             } else {
                 // console.log( status.itemStr );
@@ -104,11 +104,11 @@ function checkListItem ( arr, indent, nesting ) {
             }
 
         // if this is nesting list && the last item is unclosed
-        } else if ( isNestingList( item ) && status.unClosedListItem ) {
+        } else if ( isItemContent( item ) && status.unClosedListItem ) {
             // status.itemStr += item;
             status.itemStr.push( item );
             // whether wo shoulo append the item close tag </li>
-            if ( isNestingList( nextItem ) ) {
+            if ( isItemContent( nextItem ) ) {
                 // TODO:
             } else {
                 // if next item is not another nesting list
@@ -117,7 +117,7 @@ function checkListItem ( arr, indent, nesting ) {
                 status.itemStr.push( "</li>" );
             }
             // whether we should append the list close tag </ol> / </ul>
-            if ( status.type.test( nextItem ) || isNestingList( nextItem ) ) {
+            if ( status.type.test( nextItem ) || isItemContent( nextItem ) ) {
                 // TODO:
             } else {
                 // status.itemStr = status.itemStr + status.endTag;
@@ -130,6 +130,7 @@ function checkListItem ( arr, indent, nesting ) {
         // reset status object && push itemStr
         } else {
             if ( status.itemStr.length ) {
+
                 newArr.push( status.itemStr.join( "" ) );
             }
 
@@ -147,9 +148,9 @@ function checkListItem ( arr, indent, nesting ) {
 }
 
 // whether string is nesting list
-function isNestingList ( str ) {
-    const isNestingList = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/mi;      // TODO: fixed this
-    return isNestingList.test( str );
+function isItemContent ( str ) {
+    const isItemContent = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/mi;      // TODO: fixed this
+    return isItemContent.test( str );
 }
 
 function isPlainText ( str ) {

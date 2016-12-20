@@ -145,7 +145,7 @@ function checkListItem(arr, indent, nesting) {
                 status.isFirstListItem = false;
             }
 
-            if (isNestingList(nextItem)) {
+            if (isItemContent(nextItem)) {
                 status.unClosedListItem = true;
             } else {
                 li += "</li>";
@@ -153,24 +153,25 @@ function checkListItem(arr, indent, nesting) {
 
             status.itemStr.push(li);
 
-            if (status.type.test(nextItem) || isNestingList(nextItem)) {} else {
+            if (status.type.test(nextItem) || isItemContent(nextItem)) {} else {
                 status.itemStr.push(status.endTag);
                 status.isFirstListItem = true;
             }
-        } else if (isNestingList(item) && status.unClosedListItem) {
+        } else if (isItemContent(item) && status.unClosedListItem) {
             status.itemStr.push(item);
 
-            if (isNestingList(nextItem)) {} else {
+            if (isItemContent(nextItem)) {} else {
                 status.itemStr.push("</li>");
             }
 
-            if (status.type.test(nextItem) || isNestingList(nextItem)) {} else {
+            if (status.type.test(nextItem) || isItemContent(nextItem)) {} else {
                 status.itemStr.push(status.endTag);
                 status.isFirstListItem = true;
                 status.unClosedListItem = false;
             }
         } else {
             if (status.itemStr.length) {
+
                 newArr.push(status.itemStr.join(""));
             }
 
@@ -186,9 +187,9 @@ function checkListItem(arr, indent, nesting) {
     return newArr;
 }
 
-function isNestingList(str) {
-    var isNestingList = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/mi;
-    return isNestingList.test(str);
+function isItemContent(str) {
+    var isItemContent = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/mi;
+    return isItemContent.test(str);
 }
 
 var table = (function (content) {
