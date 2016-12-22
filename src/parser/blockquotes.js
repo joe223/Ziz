@@ -22,7 +22,5 @@ export default ( content ) => {
         // console.log( `${blockquoteStart.repeat( count )}${$3}${blockquoteEnd.repeat( count )}` );
         return `${blockquoteStart.repeat( count )}${$3}${blockquoteEnd.repeat( count )}`;
     });
-    console.log( content );
-
     return content;
 };

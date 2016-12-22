@@ -39,8 +39,6 @@ function checkListItem ( arr, indent, nesting ) {
     // let isItemContentStart = true;
     // let length = arr.length;
 
-
-
     // rebuild
     let newArr = [];
     let status = {
@@ -51,7 +49,6 @@ function checkListItem ( arr, indent, nesting ) {
         startTag: "",
         endTag: ""
     }
-    console.log( arr );
     arr.map( ( item, index, arr ) => {
         let lastItem = arr[index - 1];
         let nextItem = arr[index + 1];
@@ -106,7 +103,7 @@ function checkListItem ( arr, indent, nesting ) {
         // if this is nesting list && the last item is unclosed
         } else if ( isItemContent( item ) && status.unClosedListItem ) {
             // status.itemStr += item;
-            status.itemStr.push( item );
+            status.itemStr.push( "<br>" + item  );
             // whether wo shoulo append the item close tag </li>
             if ( isItemContent( nextItem ) ) {
                 // TODO:
@@ -149,10 +146,33 @@ function checkListItem ( arr, indent, nesting ) {
 
 // whether string is nesting list
 function isItemContent ( str ) {
-    const isItemContent = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/mi;      // TODO: fixed this
-    return isItemContent.test( str );
+    // TODO: fixed this
+    const isNestingList = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/mi;
+    console.log( str + "====" + isPlainText( str ) );
+    return isNestingList.test( str ) || isPlainText( str );
 }
 
 function isPlainText ( str ) {
-    const isPlainText = /^$/mi;
+    if ( str !== undefined || str !== null ) {
+        const isListItem = /(?:^(?:\t|(?:\u0020){4})*)(?:(?:\*|\+|\-|\d\.)(?:\u0020)+)(.*?)$/mi;
+        return !isListItem.test( str ) && !isHTML( str );
+    } else {
+        return false;
+    }
+}
+
+function isHTML ( str ) {
+    // TODO: need tag name list ["header", "li", "ul", "ol", "li", ... ]
+    const reg = /^(?:\s+)?<(\w+)>/mi;
+    if ( str ) {
+        let tagName = str.match( reg );
+        if ( tagName && tagName[1] ) {
+            let closeTagReg = new RegExp( `<\/${ tagName[1] }>(?:\s+)?$`, "mi" );
+            return closeTagReg.test( str );
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }

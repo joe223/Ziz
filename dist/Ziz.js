@@ -119,7 +119,6 @@ function checkListItem(arr, indent, nesting) {
         startTag: "",
         endTag: ""
     };
-    console.log(arr);
     arr.map(function (item, index, arr) {
         var lastItem = arr[index - 1];
         var nextItem = arr[index + 1];
@@ -158,7 +157,7 @@ function checkListItem(arr, indent, nesting) {
                 status.isFirstListItem = true;
             }
         } else if (isItemContent(item) && status.unClosedListItem) {
-            status.itemStr.push(item);
+            status.itemStr.push("<br>" + item);
 
             if (isItemContent(nextItem)) {} else {
                 status.itemStr.push("</li>");
@@ -188,8 +187,33 @@ function checkListItem(arr, indent, nesting) {
 }
 
 function isItemContent(str) {
-    var isItemContent = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/mi;
-    return isItemContent.test(str);
+    var isNestingList = /^(?:(?:<ol>|<ul>)?<li>)(.*?)(?:<\/li>(?:<\/ol>|<\/ul>)?)$/mi;
+    console.log(str + "====" + isPlainText(str));
+    return isNestingList.test(str) || isPlainText(str);
+}
+
+function isPlainText(str) {
+    if (str !== undefined || str !== null) {
+        var isListItem = /(?:^(?:\t|(?:\u0020){4})*)(?:(?:\*|\+|\-|\d\.)(?:\u0020)+)(.*?)$/mi;
+        return !isListItem.test(str) && !isHTML(str);
+    } else {
+        return false;
+    }
+}
+
+function isHTML(str) {
+    var reg = /^(?:\s+)?<(\w+)>/mi;
+    if (str) {
+        var tagName = str.match(reg);
+        if (tagName && tagName[1]) {
+            var closeTagReg = new RegExp("</" + tagName[1] + ">(?:s+)?$", "mi");
+            return closeTagReg.test(str);
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }
 
 var table = (function (content) {
@@ -266,8 +290,6 @@ var blockquotes = (function (content) {
 
         return "" + blockquoteStart.repeat(count) + $3 + blockquoteEnd.repeat(count);
     });
-    console.log(content);
-
     return content;
 });
 
