@@ -12,7 +12,7 @@ import code from "./parser/code";
 import paragraph from "./parser/paragraph";
 import blockquotes from "./parser/blockquotes";
 
-export default function Ziz ( content ) {
+export default function ziz ( content ) {
     content += "\r\n";
     // content = space( content );
     // TODO: delete space

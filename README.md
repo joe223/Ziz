@@ -1,14 +1,14 @@
 # Hello, this is Ziz
-> A markdown parser.
+> A markdown parser. Coming soon
 
 ## install
 
 ```
-npm install Ziz
+npm install ziz
 ```
 
 ## usage
 ``` javascript
-import Ziz from "Ziz"; // or require("Ziz")
-Ziz("# Ziz");
+import ziz from "ziz"; // or require("ziz")
+Ziz("# ziz");
 ```

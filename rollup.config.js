@@ -26,8 +26,8 @@ export default {
         }),
         commonjs()
     ],
-    moduleName : 'Ziz',
-    dest: './dist/Ziz.js',
+    moduleName : 'ziz',
+    dest: './dist/ziz.js',
     format : 'umd',
     sourceMap: true
 };

@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.Ziz = factory());
+  (global.ziz = factory());
 }(this, (function () { 'use strict';
 
 var config = {
@@ -293,7 +293,7 @@ var blockquotes = (function (content) {
     return content;
 });
 
-function Ziz(content) {
+function ziz(content) {
     content += "\r\n";
 
     content = escapeSpecialChars(content);
@@ -312,7 +312,7 @@ function Ziz(content) {
     return content;
 }
 
-return Ziz;
+return ziz;
 
 })));
-//# sourceMappingURL=Ziz.js.map
+//# sourceMappingURL=ziz.js.map
