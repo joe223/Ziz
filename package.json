@@ -4,6 +4,7 @@
   "description": "a markdown parser",
   "main": "dist/Ziz.js",
   "scripts": {
+    "build": "rollup -c",
     "dev": "rollup -c -w",
     "watch": "watch 'rollup -c' --wait=2 ./src",
     "test": "mocha ./test"
